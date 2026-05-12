@@ -11,11 +11,11 @@ const Contact = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = t('nameReq') || 'Required';
-    if (!formData.email.trim()) newErrors.email = t('emailReq') || 'Required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = t('emailInvalid') || 'Invalid Email';
-    if (!formData.subject.trim()) newErrors.subject = t('subjectReq') || 'Required';
-    if (!formData.message.trim()) newErrors.message = t('messageReq') || 'Required';
+    if (!formData.name.trim()) newErrors.name = 'Required';
+    if (!formData.email.trim()) newErrors.email = 'Required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Invalid Email';
+    if (!formData.subject.trim()) newErrors.subject = 'Required';
+    if (!formData.message.trim()) newErrors.message = 'Required';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -40,21 +40,21 @@ const Contact = () => {
   const contactItems = [
     { 
       icon: FiMapPin, 
-      label: t('address') || 'ADDRESS', 
+      label: 'OFFICE ADDRESS', 
       val: '129 หมู่ 9 ต.หัวโพธิ์ อ.สองพี่น้อง จ.สุพรรณบุรี 72110',
       href: 'https://maps.google.com/?q=129+Moo+9+Hua+Pho+Song+Phi+Nong+Suphan+Buri+72110',
       isExternal: true
     },
     { 
       icon: FiMail, 
-      label: t('email') || 'EMAIL', 
+      label: 'OFFICIAL EMAIL', 
       val: 'pakanan2004@gmail.com',
       href: 'mailto:pakanan2004@gmail.com',
       isExternal: false
     },
     { 
       icon: FiPhone, 
-      label: t('phone') || 'PHONE', 
+      label: 'CONTACT NUMBER', 
       val: '092-724-3149', 
       href: 'tel:0927243149',
       isExternal: false
@@ -65,11 +65,10 @@ const Contact = () => {
 
   return (
     <div className="relative min-h-screen bg-[#050505] overflow-hidden pt-32 pb-20 md:pt-48 md:pb-40">
-      {/* Premium Background Elements */}
+      {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#1a1a1a,transparent)] opacity-40"></div>
         <div className="absolute top-[10%] left-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-japan-system-secondary/5 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-[10%] right-[-10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-blue-500/5 rounded-full blur-[100px]"></div>
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]"></div>
       </div>
 
@@ -93,7 +92,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Contact Details - Left Side */}
+          {/* Contact Info Cards */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -123,28 +122,9 @@ const Contact = () => {
                 </div>
               </a>
             ))}
-
-            {/* Business Hours or Extra Info Card */}
-            <div className="glass-card p-8 md:p-12 bg-japan-system-primary/20 border border-white/5 overflow-hidden relative">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-japan-system-secondary/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
-              <h4 className="text-white font-black uppercase tracking-widest text-xs mb-6 flex items-center">
-                <span className="w-8 h-px bg-japan-system-secondary mr-4"></span>
-                {t('businessHours') || 'BUSINESS HOURS'}
-              </h4>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-gray-500">Monday — Friday</span>
-                  <span className="text-white font-bold">09:00 - 18:00</span>
-                </div>
-                <div className="flex justify-between items-center text-sm">
-                  <span className="text-gray-500">Saturday — Sunday</span>
-                  <span className="text-japan-system-secondary font-bold">Closed</span>
-                </div>
-              </div>
-            </div>
           </motion.div>
 
-          {/* Contact Form - Right Side */}
+          {/* Form UI */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -156,61 +136,45 @@ const Contact = () => {
                 <h3 className="text-xl md:text-3xl font-black text-white mb-4 uppercase tracking-tight italic">
                   {t('sendMessage') || 'SEND A MESSAGE'}
                 </h3>
-                <p className="text-gray-500 text-sm">{t('formHelp') || 'We normally respond within 24 hours.'}</p>
+                <p className="text-gray-500 text-sm">We normally respond within 24 hours.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">{t('fullName') || 'FULL NAME'}</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">FULL NAME</label>
                     <input 
                       name="name"
                       type="text" 
                       value={formData.name}
                       onChange={handleChange}
                       className={`${inputBaseClass} ${errors.name ? 'border-red-500/50' : ''}`}
-                      placeholder={t('enterNamePlaceholder') || 'Enter your name'} 
+                      placeholder="Enter your name" 
                     />
-                    {errors.name && <p className="text-red-400 text-[10px] ml-4 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.name}</p>}
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">{t('emailAddr') || 'EMAIL ADDRESS'}</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">EMAIL ADDRESS</label>
                     <input 
                       name="email"
                       type="email" 
                       value={formData.email}
                       onChange={handleChange}
                       className={`${inputBaseClass} ${errors.email ? 'border-red-500/50' : ''}`}
-                      placeholder={t('enterEmailPlaceholder') || 'Enter your email'} 
+                      placeholder="Enter your email" 
                     />
-                    {errors.email && <p className="text-red-400 text-[10px] ml-4 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.email}</p>}
                   </div>
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">{t('subject') || 'SUBJECT'}</label>
-                  <input 
-                    name="subject"
-                    type="text" 
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className={`${inputBaseClass} ${errors.subject ? 'border-red-500/50' : ''}`}
-                    placeholder={t('helpPlaceholder') || 'How can we help?'} 
-                  />
-                  {errors.subject && <p className="text-red-400 text-[10px] ml-4 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.subject}</p>}
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">{t('messageBody') || 'MESSAGE'}</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">MESSAGE</label>
                   <textarea 
                     name="message"
                     rows="5" 
                     value={formData.message}
                     onChange={handleChange}
                     className={`${inputBaseClass} resize-none ${errors.message ? 'border-red-500/50' : ''}`}
-                    placeholder={t('tellUsPlaceholder') || 'Tell us about your project...'}
+                    placeholder="Tell us about your project..."
                   ></textarea>
-                  {errors.message && <p className="text-red-400 text-[10px] ml-4 flex items-center gap-1"><FiAlertCircle className="w-3 h-3" />{errors.message}</p>}
                 </div>
 
                 <button 
@@ -220,7 +184,7 @@ const Contact = () => {
                 >
                   {formStatus === 'idle' && (
                     <>
-                      <span>{t('sendBtn') || 'SEND MESSAGE'}</span>
+                      <span>SEND MESSAGE</span>
                       <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
@@ -228,7 +192,7 @@ const Contact = () => {
                     <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }} className="w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
                   )}
                   {formStatus === 'success' && (
-                    <span className="flex items-center gap-2"><FiCheck className="w-4 h-4" /> {t('messageSent') || 'MESSAGE SENT'}</span>
+                    <span className="flex items-center gap-2"><FiCheck className="w-4 h-4" /> MESSAGE SENT</span>
                   )}
                 </button>
               </form>
