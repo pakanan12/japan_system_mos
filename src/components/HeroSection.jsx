@@ -195,7 +195,6 @@ const HeroSection = () => {
       </motion.div>
 
       <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-japan-system-bg via-japan-system-bg/40 to-transparent z-[2] pointer-events-none"></div>
-    </div>me="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-japan-system-bg to-transparent z-[2] pointer-events-none"></div>
     </div>
   );
 };

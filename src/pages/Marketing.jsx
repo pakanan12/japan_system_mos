@@ -116,7 +116,6 @@ const Marketing = () => {
                 <FiArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
-          </motion.div>
         </div>
       </div>
     </div>
