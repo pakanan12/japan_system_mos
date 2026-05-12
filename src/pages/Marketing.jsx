@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { FiMonitor, FiBarChart2, FiSearch, FiMail, FiArrowRight } from 'react-icons/fi';
+import { FaFacebookF, FaInstagram, FaTwitter, FaLine } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import TiltCard from '../components/TiltCard';
@@ -32,6 +33,13 @@ const Marketing = () => {
       desc: t('emailMarketingDesc'),
       tags: ['CRM', 'Automation', 'Direct']
     }
+  ];
+
+  const socialLinks = [
+    { icon: FaFacebookF, label: 'Facebook', url: 'https://facebook.com', color: '#1877F2' },
+    { icon: FaInstagram, label: 'Instagram', url: 'https://instagram.com', color: '#E4405F' },
+    { icon: FaTwitter, label: 'Twitter / X', url: 'https://twitter.com', color: '#000000' },
+    { icon: FaLine, label: 'Line', url: 'https://line.me', color: '#06C755' }
   ];
 
 
@@ -102,6 +110,42 @@ const Marketing = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Social Media Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16 md:mb-24 px-2 md:px-0"
+        >
+          <div className="text-center mb-10 md:mb-16">
+            <span className="text-japan-system-secondary text-[9px] md:text-xs font-black uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 block">Connect with Us</span>
+            <h2 className="text-xl md:text-3xl font-black text-japan-system-primary tracking-tight uppercase italic px-4 md:px-0">
+              Our <span className="text-japan-system-secondary">Social Channels</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {socialLinks.map((social, i) => (
+              <a 
+                key={i} 
+                href={social.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <div className="bg-white border border-gray-100 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 hover:shadow-xl hover:border-japan-system-secondary/30 hover:-translate-y-1">
+                  <div 
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 shadow-sm group-hover:scale-110"
+                    style={{ backgroundColor: social.color + '10' }}
+                  >
+                    <social.icon className="w-5 h-5" style={{ color: social.color }} />
+                  </div>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 group-hover:text-japan-system-primary transition-colors">{social.label}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </motion.div>
 
 
         <div className="grid grid-cols-1 gap-10 md:gap-16 items-center px-2 md:px-0">

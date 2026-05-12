@@ -47,15 +47,15 @@ const Contact = () => {
     }
   ];
 
-  const inputBaseClass = "w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl outline-none transition-all duration-300 font-medium text-white placeholder:text-gray-500 focus:border-japan-system-secondary/50 focus:bg-white/10";
+  const inputBaseClass = "w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none transition-all duration-300 font-medium text-japan-system-primary placeholder:text-gray-400 focus:border-japan-system-secondary focus:bg-white focus:ring-4 focus:ring-japan-system-secondary/5";
 
   return (
-    <div className="relative min-h-screen bg-[#050505] overflow-hidden pt-32 pb-20 md:pt-48 md:pb-40">
+    <div className="relative min-h-screen bg-white overflow-hidden pt-32 pb-20 md:pt-48 md:pb-40">
       {/* Background Decor */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#1a1a1a,transparent)] opacity-40"></div>
-        <div className="absolute top-[10%] left-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-japan-system-secondary/5 rounded-full blur-[120px]"></div>
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.02]"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#f8fafc,transparent)] opacity-100"></div>
+        <div className="absolute top-[10%] left-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-blue-50 rounded-full blur-[120px]"></div>
+        <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
@@ -68,11 +68,11 @@ const Contact = () => {
           <span className="text-japan-system-secondary text-[10px] md:text-xs font-black uppercase tracking-[0.5em] mb-6 block">
             {t('getInTouch') || 'CONTACT US'}
           </span>
-          <h1 className="text-4xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1]">
+          <h1 className="text-4xl md:text-7xl font-black text-japan-system-primary mb-8 tracking-tight leading-[1.1]">
             Let's <span className="text-japan-system-secondary">Connect</span>
           </h1>
           <div className="w-16 h-1 bg-japan-system-secondary mx-auto rounded-full mb-10"></div>
-          <p className="max-w-2xl mx-auto text-gray-400 text-base md:text-lg leading-relaxed opacity-80">
+          <p className="max-w-2xl mx-auto text-gray-500 text-base md:text-lg leading-relaxed">
             Have a project in mind or need expert DX advice? Reach out to our team and let's build something exceptional together.
           </p>
         </motion.div>
@@ -93,14 +93,14 @@ const Contact = () => {
                 rel={item.isExternal ? 'noopener noreferrer' : undefined}
                 className="group block"
               >
-                <div className="glass-card p-6 md:p-10 bg-white/5 border border-white/10 hover:border-japan-system-secondary/30 transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+                <div className="bg-white border border-gray-100 p-6 md:p-10 rounded-3xl shadow-sm hover:shadow-xl hover:border-japan-system-secondary/30 transition-all duration-500">
                   <div className="flex items-center space-x-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-white/5 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-japan-system-secondary group-hover:text-white transition-all duration-500">
-                      <item.icon className="w-5 h-5 md:w-7 md:h-7 text-japan-system-secondary group-hover:text-white transition-colors" />
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-50 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-japan-system-primary group-hover:text-white transition-all duration-500">
+                      <item.icon className="w-5 h-5 md:w-7 md:h-7 text-japan-system-primary group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-500 mb-2 block">{item.label}</span>
-                      <p className="text-white font-bold text-sm md:text-lg leading-relaxed group-hover:text-japan-system-secondary transition-colors">
+                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-2 block">{item.label}</span>
+                      <p className="text-japan-system-primary font-bold text-sm md:text-lg leading-relaxed group-hover:text-japan-system-secondary transition-colors">
                         {item.val}
                       </p>
                     </div>
@@ -117,9 +117,9 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="lg:col-span-7"
           >
-            <div className="glass-card p-8 md:p-12 bg-white/[0.03] border border-white/10 shadow-2xl relative">
+            <div className="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
               <div className="mb-10">
-                <h3 className="text-xl md:text-3xl font-black text-white mb-4 uppercase tracking-tight italic">
+                <h3 className="text-xl md:text-3xl font-black text-japan-system-primary mb-4 uppercase tracking-tight italic">
                   SEND A MESSAGE
                 </h3>
                 <p className="text-gray-500 text-sm">We normally respond within 24 hours.</p>
@@ -128,7 +128,7 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">FULL NAME</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">FULL NAME</label>
                     <input 
                       name="name"
                       type="text" 
@@ -139,7 +139,7 @@ const Contact = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">EMAIL ADDRESS</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">EMAIL ADDRESS</label>
                     <input 
                       name="email"
                       type="email" 
@@ -152,7 +152,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4">MESSAGE</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">MESSAGE</label>
                   <textarea 
                     name="message"
                     rows="5" 
