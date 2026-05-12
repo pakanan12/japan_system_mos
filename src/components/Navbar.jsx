@@ -35,41 +35,26 @@ const Navbar = () => {
       } lg:flex items-center`}
     >
       {/* Mobile Floating Bar Layout */}
-      <div className={`lg:hidden fixed top-4 left-4 right-4 z-[110] transition-all duration-500 ${scrolled ? 'translate-y-0' : 'translate-y-0'}`}>
-        <div className={`flex items-center justify-between px-5 py-3 rounded-2xl border transition-all duration-500 ${
+      <div className={`lg:hidden fixed top-5 left-5 right-5 z-[110] transition-all duration-500 ${scrolled ? 'translate-y-0' : 'translate-y-0'}`}>
+        <div className={`flex items-center justify-between px-6 py-3.5 rounded-[20px] border transition-all duration-500 ${
           scrolled 
-            ? 'bg-white/90 backdrop-blur-xl border-gray-200/50 shadow-lg' 
-            : 'bg-black/10 backdrop-blur-md border-white/10'
+            ? 'bg-white/90 backdrop-blur-2xl border-gray-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.08)]' 
+            : 'bg-black/20 backdrop-blur-xl border-white/10 shadow-2xl'
         }`}>
           <Link to="/" className="flex flex-col" onClick={() => setMobileMenuOpen(false)}>
-            <span className={`text-xl font-black tracking-tight leading-none ${scrolled ? 'text-japan-system-primary' : 'text-white'}`}>
+            <span className={`text-xl font-black tracking-tight leading-none transition-colors duration-300 ${scrolled ? 'text-japan-system-primary' : 'text-white'}`}>
               MOS <span className="font-light">Japan</span>
             </span>
-            <span className={`text-[8px] font-bold tracking-[0.2em] uppercase mt-0.5 ${scrolled ? 'text-japan-system-secondary' : 'text-blue-400'}`}>
+            <span className={`text-[9px] font-black tracking-[0.25em] uppercase mt-1 transition-colors duration-300 ${scrolled ? 'text-japan-system-secondary' : 'text-blue-400'}`}>
               {t('systemAndSolutions')}
             </span>
           </Link>
 
-          <div className="flex items-center space-x-3">
-            <div className={`flex items-center rounded-lg p-0.5 border ${scrolled ? 'bg-gray-100/80 border-gray-200' : 'bg-white/10 border-white/20'}`}>
-              {['en', 'th', 'ja'].map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={`px-2 py-1 rounded-md text-[9px] font-black uppercase transition-all duration-300 ${
-                    lang.startsWith(l) 
-                      ? (scrolled ? 'bg-white text-japan-system-primary shadow-sm' : 'bg-white/20 text-white shadow-sm') 
-                      : (scrolled ? 'text-gray-400 hover:text-japan-system-primary' : 'text-white/40 hover:text-white')
-                  }`}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
-
+          <div className="flex items-center space-x-4">
             <button 
-              className={`p-2 rounded-xl transition-all duration-300 ${scrolled ? 'bg-japan-system-primary/5 text-japan-system-primary' : 'bg-white/10 text-white'}`}
+              className={`p-2.5 rounded-2xl transition-all duration-300 active:scale-90 ${scrolled ? 'bg-japan-system-primary/5 text-japan-system-primary' : 'bg-white/10 text-white'}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? <FiX className="w-5 h-5" /> : <FiMenu className="w-5 h-5" />}
             </button>
@@ -78,6 +63,7 @@ const Navbar = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full hidden lg:block">
+        {/* Desktop Navbar content remains unchanged */}
         <div className="flex justify-between items-center">
           <Magnetic strength={0.1}>
             <Link to="/" className="group relative z-10 flex items-center space-x-2">
@@ -172,14 +158,20 @@ const Navbar = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 bg-white/95 backdrop-blur-2xl z-[105] lg:hidden overflow-hidden"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 bg-white z-[105] lg:hidden overflow-hidden flex flex-col"
           >
-            <div className="flex flex-col h-full pt-28 px-10">
-              <div className="flex flex-col space-y-5">
+            {/* Background Decoration */}
+            <div className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none">
+              <div className="absolute top-[20%] right-[-10%] w-[300px] h-[300px] bg-japan-system-primary rounded-full blur-[100px]"></div>
+              <div className="absolute bottom-[10%] left-[-10%] w-[250px] h-[250px] bg-japan-system-secondary rounded-full blur-[80px]"></div>
+            </div>
+
+            <div className="flex flex-col h-full pt-32 px-10 relative z-10">
+              <div className="flex flex-col space-y-7">
                 {[
                   { to: '/', label: t('navHome') },
                   { to: '/new-release', label: t('newRelease') },
@@ -190,38 +182,59 @@ const Navbar = () => {
                 ].map((link, idx) => (
                   <motion.div
                     key={link.to}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    transition={{ duration: 0.5, delay: 0.1 + idx * 0.05 }}
                   >
                     <Link 
                       to={link.to} 
                       onClick={() => setMobileMenuOpen(false)} 
-                      className={`text-2xl font-black uppercase tracking-tight flex items-center justify-between group ${isActive(link.to) ? 'text-japan-system-secondary' : 'text-japan-system-primary'}`}
+                      className={`text-3xl font-black uppercase tracking-tight flex items-center justify-between group transition-colors duration-300 ${isActive(link.to) ? 'text-japan-system-secondary' : 'text-japan-system-primary'}`}
                     >
                       <span>{link.label}</span>
-                      <div className={`h-1 bg-japan-system-secondary transition-all duration-500 ${isActive(link.to) ? 'w-8' : 'w-0'}`}></div>
+                      <motion.div 
+                        initial={{ width: 0 }}
+                        animate={{ width: isActive(link.to) ? 40 : 0 }}
+                        className="h-1.5 bg-japan-system-secondary rounded-full"
+                      />
                     </Link>
                   </motion.div>
                 ))}
               </div>
 
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
                 className="mt-auto pb-12"
               >
-                <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-gray-400 mb-6 px-2">
-                  <span>Connect with Us</span>
-                  <div className="flex space-x-4">
-                    {/* Add social icons if needed */}
+                <div className="flex flex-col space-y-8">
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-4 px-1">Switch Language</span>
+                      <div className="flex gap-2">
+                        {['en', 'th', 'ja'].map((l) => (
+                          <button
+                            key={l}
+                            onClick={() => setLang(l)}
+                            className={`px-4 py-2 rounded-xl text-[11px] font-black uppercase transition-all duration-300 ${
+                              lang.startsWith(l) 
+                                ? 'bg-japan-system-primary text-white shadow-lg' 
+                                : 'bg-gray-100 text-gray-400'
+                            }`}
+                          >
+                            {l}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                   </div>
+
+                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="w-full luxury-button py-5 flex items-center justify-center space-x-3 shadow-2xl rounded-2xl group">
+                    <span className="text-sm uppercase font-black tracking-widest">{t('getInTouch')}</span>
+                    <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
-                <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="w-full luxury-button py-5 flex items-center justify-center space-x-3 shadow-xl">
-                  <span className="text-sm">{t('getInTouch')}</span>
-                  <FiArrowRight />
-                </Link>
               </motion.div>
             </div>
           </motion.div>

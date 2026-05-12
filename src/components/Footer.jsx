@@ -38,23 +38,23 @@ const Footer = () => {
   const languages = ['en', 'th', 'ja'];
 
   return (
-    <footer className="bg-white border-t border-gray-100 relative z-10 pt-12 md:pt-20 pb-8 md:pb-10">
+    <footer className="bg-white border-t border-gray-100 relative z-10 pt-16 md:pt-24 pb-8 md:pb-12">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16 mb-16 md:mb-20">
           
-          <div className="lg:col-span-1 text-center sm:text-left">
-            <Link to="/" className="inline-block mb-6">
-              <span className="text-xl md:text-2xl font-black text-japan-system-primary tracking-tighter">
+          <div className="lg:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
+            <Link to="/" className="inline-block mb-8">
+              <span className="text-2xl md:text-3xl font-black text-japan-system-primary tracking-tighter">
                 MOS <span className="font-light">Japan</span>
               </span>
-              <span className="block text-[8px] md:text-[10px] font-bold tracking-[0.2em] uppercase text-japan-system-secondary mt-0.5">
+              <span className="block text-[9px] md:text-[10px] font-black tracking-[0.3em] uppercase text-japan-system-secondary mt-1">
                 {t('systemAndSolutions')}
               </span>
             </Link>
-            <p className="text-gray-500 text-[12px] md:text-sm leading-relaxed mb-8 max-w-xs mx-auto sm:mx-0 px-4 sm:px-0">
+            <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-xs md:max-w-none px-2 md:px-0 opacity-80">
               {t('footerDesc')}
             </p>
-            <div className="flex justify-center sm:justify-start space-x-3">
+            <div className="flex justify-center md:justify-start space-x-4">
               {socialLinks.map((social, i) => (
                 <a 
                   key={i} 
@@ -62,68 +62,80 @@ const Footer = () => {
                   target="_blank" 
                   rel="noopener noreferrer" 
                   aria-label={social.label}
-                  className="w-9 h-9 md:w-10 md:h-10 bg-gray-50 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-japan-system-primary transition-all duration-300 hover:scale-110 hover:shadow-md"
+                  className="w-10 h-10 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-japan-system-primary transition-all duration-500 hover:scale-110 hover:shadow-xl border border-gray-100"
                 >
-                  <social.icon className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                  <social.icon className="w-4 h-4" />
                 </a>
               ))}
             </div>
           </div>
 
-          {footerLinks.map((column, i) => (
-            <div key={i} className="text-center sm:text-left">
-              <h4 className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-japan-system-primary mb-5 md:mb-8">{column.title}</h4>
-              <ul className="space-y-3 md:space-y-4">
-                {column.links.map((link, j) => (
-                  <li key={j}>
-                    <Link to={link.to} className="text-gray-500 hover:text-japan-system-secondary text-[12px] md:text-sm transition-colors duration-300 hover:translate-x-1 inline-block">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="grid grid-cols-2 gap-8 lg:col-span-2">
+            {footerLinks.map((column, i) => (
+              <div key={i} className="text-left">
+                <h4 className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-japan-system-primary mb-6 md:mb-8 border-l-2 border-japan-system-secondary pl-3">
+                  {column.title}
+                </h4>
+                <ul className="space-y-4 md:space-y-5">
+                  {column.links.map((link, j) => (
+                    <li key={j}>
+                      <Link to={link.to} className="text-gray-500 hover:text-japan-system-secondary text-[13px] md:text-sm transition-all duration-300 hover:translate-x-1 inline-block font-medium">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
 
-          <div className="text-center sm:text-left">
-            <h4 className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-japan-system-primary mb-5 md:mb-8">{t('contact')}</h4>
-            <ul className="space-y-5">
-              <li className="flex flex-col sm:flex-row items-center sm:items-start space-y-2 sm:space-y-0 sm:space-x-3 text-[12px] md:text-sm text-gray-500 leading-relaxed group">
-                <FiMapPin className="text-japan-system-secondary mt-0.5 shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" />
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="text-[10px] md:text-xs font-black uppercase tracking-[0.3em] text-japan-system-primary mb-6 md:mb-8 border-l-2 border-japan-system-secondary pl-3 self-start ml-[calc(50%-60px)] md:ml-0">
+              {t('contact')}
+            </h4>
+            <ul className="space-y-6 w-full">
+              <li className="flex flex-col md:flex-row items-center md:items-start space-y-3 md:space-y-0 md:space-x-4 text-sm text-gray-500 leading-relaxed group">
+                <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-japan-system-secondary transition-colors duration-300">
+                  <FiMapPin className="text-japan-system-primary group-hover:text-white w-4 h-4" />
+                </div>
                 <a 
                   href="https://maps.google.com/?q=253+Asoke+Building+Sukhumvit+21+Bangkok" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group-hover:text-japan-system-secondary transition-colors leading-relaxed px-4 sm:px-0"
+                  className="hover:text-japan-system-secondary transition-colors leading-relaxed px-4 md:px-0 font-medium"
                 >
                   28th Fl, 253 Asoke Building,<br />
                   Sukhumvit 21 Rd., Wattana,<br />
                   Bangkok 10110
                 </a>
               </li>
-              <li className="flex flex-col sm:flex-row items-center sm:items-start space-y-2 sm:space-y-0 sm:space-x-3 text-[12px] md:text-sm text-gray-500 group">
-                <FiPhone className="text-japan-system-secondary shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" />
-                <a href="tel:+6626641674" className="group-hover:text-japan-system-secondary transition-colors">(02) 664-1674</a>
+              <li className="flex flex-col md:flex-row items-center md:items-start space-y-2 md:space-y-0 md:space-x-4 text-sm text-gray-500 group">
+                <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-japan-system-secondary transition-colors duration-300">
+                  <FiPhone className="text-japan-system-primary group-hover:text-white w-4 h-4" />
+                </div>
+                <a href="tel:+6626641674" className="hover:text-japan-system-secondary transition-colors font-medium">(02) 664-1674</a>
               </li>
-              <li className="flex flex-col sm:flex-row items-center sm:items-start space-y-2 sm:space-y-0 sm:space-x-3 text-[12px] md:text-sm text-gray-500 group">
-                <FiMail className="text-japan-system-secondary shrink-0 w-3.5 h-3.5 md:w-4 md:h-4" />
-                <a href="mailto:info@jpsys-th.com" className="group-hover:text-japan-system-secondary transition-colors">info@jpsys-th.com</a>
+              <li className="flex flex-col md:flex-row items-center md:items-start space-y-2 md:space-y-0 md:space-x-4 text-sm text-gray-500 group">
+                <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-japan-system-secondary transition-colors duration-300">
+                  <FiMail className="text-japan-system-primary group-hover:text-white w-4 h-4" />
+                </div>
+                <a href="mailto:info@jpsys-th.com" className="hover:text-japan-system-secondary transition-colors font-medium">info@jpsys-th.com</a>
               </li>
             </ul>
 
-            <div className="mt-8">
-              <div className="flex items-center justify-center sm:justify-start gap-2 mb-3">
-                <FiGlobe className="text-gray-400 w-3 h-3" />
-                <span className="text-[8px] md:text-[9px] font-black uppercase tracking-widest text-gray-400">Language</span>
+            <div className="mt-10 w-full flex flex-col items-center md:items-start">
+              <div className="flex items-center gap-2 mb-4">
+                <FiGlobe className="text-gray-400 w-3.5 h-3.5" />
+                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Regional Language</span>
               </div>
-              <div className="flex justify-center sm:justify-start gap-2">
+              <div className="flex gap-2">
                 {languages.map((l) => (
                   <button
                     key={l}
                     onClick={() => i18n.changeLanguage(l)}
-                    className={`px-3 py-1.5 rounded-lg text-[8px] md:text-[9px] font-black uppercase tracking-wider transition-all duration-300 ${
+                    className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all duration-500 ${
                       lang.startsWith(l)
-                        ? 'bg-japan-system-primary text-white shadow-sm'
+                        ? 'bg-japan-system-primary text-white shadow-lg scale-105'
                         : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                     }`}
                   >
@@ -136,14 +148,14 @@ const Footer = () => {
 
         </div>
 
-        <div className="border-t border-gray-50 pt-8 md:pt-10 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
-          <div className="text-gray-400 text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] text-center md:text-left leading-relaxed">
+        <div className="border-t border-gray-100 pt-10 md:pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="text-gray-400 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.15em] text-center md:text-left leading-loose opacity-70">
             <p>&copy; {new Date().getFullYear()} Japan System Co., Ltd. &amp; Japan System (Thailand) Co., Ltd.</p>
-            <p className="mt-1 opacity-60 uppercase">{t('allRightsReserved')}</p>
+            <p className="mt-1 uppercase tracking-[0.3em] text-[9px]">{t('allRightsReserved')}</p>
           </div>
-          <div className="flex gap-4 md:gap-8">
-            <Link to="/company" className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-japan-system-secondary transition-colors">{t('privacyPolicy')}</Link>
-            <Link to="/contact" className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-japan-system-secondary transition-colors">{t('termsOfService')}</Link>
+          <div className="flex gap-6 md:gap-10">
+            <Link to="/company" className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-gray-400 hover:text-japan-system-secondary transition-all duration-300">{t('privacyPolicy')}</Link>
+            <Link to="/contact" className="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-gray-400 hover:text-japan-system-secondary transition-all duration-300">{t('termsOfService')}</Link>
           </div>
         </div>
       </div>
