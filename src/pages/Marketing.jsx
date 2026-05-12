@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { FaFacebookF, FaLine, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { FiMonitor, FiBarChart2, FiSearch, FiMail, FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -35,19 +34,6 @@ const Marketing = () => {
     }
   ];
 
-  const socialChannels = [
-    { icon: FaFacebookF, label: 'Facebook', url: 'https://www.facebook.com/mosjapan', color: '#1877F2', desc: t('facebookDesc') },
-    { icon: FaInstagram, label: 'Instagram', url: 'https://instagram.com', color: '#E4405F', desc: t('instagramDesc') },
-    { icon: FaLine, label: 'LINE', url: 'https://line.me', color: '#06C755', desc: t('lineDesc') },
-    { icon: FaTwitter, label: 'Twitter / X', url: 'https://twitter.com', color: '#1DA1F2', desc: t('twitterDesc') },
-  ];
-
-  const socialLinks = [
-    { icon: FaFacebookF, url: 'https://www.facebook.com/mosjapan', color: '#1877F2' },
-    { icon: FaLine, url: 'https://line.me', color: '#06C755' },
-    { icon: FaTwitter, url: 'https://twitter.com', color: '#1DA1F2' },
-    { icon: FaInstagram, url: 'https://instagram.com', color: '#E4405F' },
-  ];
 
   return (
     <div className="relative min-h-screen bg-japan-system-bg overflow-hidden pt-24 md:pt-32 pb-20 md:pb-32">
@@ -117,77 +103,8 @@ const Marketing = () => {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16 md:mb-24 px-2 md:px-0"
-        >
-          <div className="text-center mb-10 md:mb-16">
-            <span className="text-japan-system-secondary text-[9px] md:text-xs font-black uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 block">{t('followSocial')}</span>
-            <h2 className="text-xl md:text-3xl font-black text-japan-system-primary tracking-tight uppercase italic px-4 md:px-0">
-              {t('socialGrowth')} <span className="text-japan-system-secondary">{t('socialGrowthSuffix')}</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {socialChannels.map((ch, i) => (
-              <a key={i} href={ch.url} target="_blank" rel="noopener noreferrer">
-                <TiltCard tiltMaxAngleX={4} tiltMaxAngleY={4} className="h-full">
-                  <div className="glass-card p-6 md:p-8 h-full flex items-center md:flex-col text-left md:text-center group hover:border-japan-system-secondary/30 transition-all duration-500 cursor-pointer">
-                    <div
-                      className="w-10 h-10 md:w-16 md:h-16 rounded-xl md:rounded-2xl flex items-center justify-center transition-all duration-500 shadow-sm shrink-0"
-                      style={{ backgroundColor: ch.color + '18' }}
-                    >
-                      <ch.icon className="w-4 h-4 md:w-7 md:h-7" style={{ color: ch.color }} />
-                    </div>
-                    <div className="ml-5 md:ml-0 md:mt-6">
-                      <h4 className="text-base font-black text-japan-system-primary mb-1 md:mb-3">{ch.label}</h4>
-                      <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed line-clamp-2 md:line-clamp-none">{ch.desc}</p>
-                    </div>
-                  </div>
-                </TiltCard>
-              </a>
-            ))}
-          </div>
-        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center px-2 md:px-0">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center lg:text-left"
-          >
-            <h2 className="text-xl md:text-3xl font-black text-japan-system-primary mb-5 md:mb-6 tracking-tight uppercase italic px-4 md:px-0">
-              {t('socialGrowth')} <span className="text-japan-system-secondary">{t('socialGrowthSuffix')}</span>
-            </h2>
-            <p className="text-gray-600 text-[13px] md:text-lg leading-relaxed mb-8 md:mb-10 px-4 md:px-0">
-              {t('socialGrowthDesc')}
-            </p>
-            <div className="flex gap-3 justify-center lg:justify-start">
-              {socialLinks.map((social, i) => (
-                <a 
-                  key={i}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 md:w-14 md:h-14 bg-white border border-gray-100 rounded-xl md:rounded-2xl flex items-center justify-center text-japan-system-primary hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg shrink-0"
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = social.color}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
-                >
-                  <social.icon className="w-4 h-4 md:w-6 md:h-6" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
+        <div className="grid grid-cols-1 gap-10 md:gap-16 items-center px-2 md:px-0">
             <div className="glass-card p-8 md:p-12 bg-gradient-to-br from-japan-system-primary to-japan-system-primary/90 text-white shadow-2xl relative overflow-hidden text-center lg:text-left">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
               <h3 className="text-lg md:text-2xl font-black mb-4 md:mb-6 tracking-tight uppercase">{t('readyToGrow')}</h3>

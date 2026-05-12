@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FiFacebook, FiInstagram, FiMail, FiPhone, FiMapPin, FiYoutube, FiGlobe } from 'react-icons/fi';
-import { FaLine } from 'react-icons/fa';
+import { FiMail, FiPhone, FiMapPin, FiGlobe } from 'react-icons/fi';
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
@@ -28,12 +27,6 @@ const Footer = () => {
     }
   ];
 
-  const socialLinks = [
-    { icon: FiFacebook, url: 'https://www.facebook.com/mosjapan', label: 'Facebook' },
-    { icon: FaLine, url: 'https://line.me/ti/p/@mosjapan', label: 'Line' },
-    { icon: FiInstagram, url: 'https://www.instagram.com/mosjapan', label: 'Instagram' },
-    { icon: FiYoutube, url: 'https://youtube.com/', label: 'YouTube' },
-  ];
 
   const languages = ['en', 'th', 'ja'];
 
@@ -54,20 +47,6 @@ const Footer = () => {
             <p className="text-gray-500 text-sm leading-relaxed mb-8 max-w-xs md:max-w-none px-2 md:px-0 opacity-80">
               {t('footerDesc')}
             </p>
-            <div className="flex justify-center md:justify-start space-x-4">
-              {socialLinks.map((social, i) => (
-                <a 
-                  key={i} 
-                  href={social.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  aria-label={social.label}
-                  className="w-10 h-10 bg-gray-50 rounded-2xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-japan-system-primary transition-all duration-500 hover:scale-110 hover:shadow-xl border border-gray-100"
-                >
-                  <social.icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-8 lg:col-span-2">
