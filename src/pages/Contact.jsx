@@ -26,23 +26,23 @@ const Contact = () => {
   const contactItems = [
     { 
       icon: FiMapPin, 
-      label: t('contact.addressLabel'), 
-      val: t('contact.address'),
-      href: `https://maps.google.com/?q=${encodeURIComponent(t('contact.address'))}`,
+      label: t('contactPage.addressLabel'), 
+      val: t('contactPage.address'),
+      href: `https://maps.google.com/?q=${encodeURIComponent(t('contactPage.address'))}`,
       isExternal: true
     },
     { 
       icon: FiMail, 
-      label: t('contact.emailLabel'), 
-      val: t('contact.email'),
-      href: `mailto:${t('contact.email')}`,
+      label: t('contactPage.emailLabel'), 
+      val: t('contactPage.email'),
+      href: `mailto:${t('contactPage.email')}`,
       isExternal: false
     },
     { 
       icon: FiPhone, 
-      label: t('contact.phoneLabel'), 
-      val: t('contact.phone'), 
-      href: `tel:${t('contact.phone').replace(/-/g, '')}`,
+      label: t('contactPage.phoneLabel'), 
+      val: t('contactPage.phone'), 
+      href: `tel:${t('contactPage.phone').replace(/-/g, '')}`,
       isExternal: false
     }
   ];
@@ -66,14 +66,14 @@ const Contact = () => {
           className="text-center mb-16 md:mb-32"
         >
           <span className="text-japan-system-secondary text-[10px] md:text-xs font-black uppercase tracking-[0.5em] mb-6 block">
-            {t('contact.subtitle')}
+            {t('contactPage.subtitle')}
           </span>
           <h1 className="text-4xl md:text-7xl font-black text-japan-system-primary mb-8 tracking-tight leading-[1.1]">
-            {t('contact.title')}
+            {t('contactPage.title')}
           </h1>
           <div className="w-16 h-1 bg-japan-system-secondary mx-auto rounded-full mb-10"></div>
           <p className="max-w-2xl mx-auto text-gray-500 text-base md:text-lg leading-relaxed">
-            {t('contact.expertsDesc')}
+            {t('contactPage.expertsDesc')}
           </p>
         </motion.div>
 
@@ -120,46 +120,46 @@ const Contact = () => {
             <div className="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
               <div className="mb-10">
                 <h3 className="text-xl md:text-3xl font-black text-japan-system-primary mb-4 uppercase tracking-tight italic">
-                  {t('contact.sendMessage')}
+                  {t('contactPage.sendMessage')}
                 </h3>
-                <p className="text-gray-500 text-sm">{t('contact.formHelp')}</p>
+                <p className="text-gray-500 text-sm">{t('contactPage.formHelp')}</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{t('contact.fullName')}</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{t('contactPage.fullName')}</label>
                     <input 
                       name="name"
                       type="text" 
                       value={formData.name}
                       onChange={handleChange}
                       className={inputBaseClass}
-                      placeholder={t('contact.enterName')} 
+                      placeholder={t('contactPage.enterName')} 
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{t('contact.emailAddr')}</label>
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{t('contactPage.emailAddr')}</label>
                     <input 
                       name="email"
                       type="email" 
                       value={formData.email}
                       onChange={handleChange}
                       className={inputBaseClass}
-                      placeholder={t('contact.enterEmail')} 
+                      placeholder={t('contactPage.enterEmail')} 
                     />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{t('contact.message')}</label>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{t('contactPage.message')}</label>
                   <textarea 
                     name="message"
                     rows="5" 
                     value={formData.message}
                     onChange={handleChange}
                     className={`${inputBaseClass} resize-none`}
-                    placeholder={t('contact.tellUs')}
+                    placeholder={t('contactPage.tellUs')}
                   ></textarea>
                 </div>
 
@@ -170,7 +170,7 @@ const Contact = () => {
                 >
                   {formStatus === 'idle' && (
                     <>
-                      <span>{t('contact.sendBtn')}</span>
+                      <span>{t('contactPage.sendBtn')}</span>
                       <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
@@ -178,7 +178,7 @@ const Contact = () => {
                     <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }} className="w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
                   )}
                   {formStatus === 'success' && (
-                    <span className="flex items-center gap-2"><FiCheck className="w-4 h-4" /> {t('contact.messageSent')}</span>
+                    <span className="flex items-center gap-2"><FiCheck className="w-4 h-4" /> {t('contactPage.messageSent')}</span>
                   )}
                 </button>
               </form>
