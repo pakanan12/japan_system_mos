@@ -1,38 +1,24 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FiMail, FiPhone, FiMapPin, FiSend, FiCheck, FiAlertCircle, FiArrowRight } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiCheck, FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
 const Contact = () => {
   const { t } = useTranslation();
   const [formStatus, setFormStatus] = useState('idle');
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [errors, setErrors] = useState({});
-
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Required';
-    if (!formData.email.trim()) newErrors.email = 'Required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Invalid Email';
-    if (!formData.subject.trim()) newErrors.subject = 'Required';
-    if (!formData.message.trim()) newErrors.message = 'Required';
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
     setFormStatus('sending');
     setTimeout(() => {
       setFormStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setFormStatus('idle'), 4000);
     }, 1500);
   };
@@ -87,7 +73,7 @@ const Contact = () => {
           </h1>
           <div className="w-16 h-1 bg-japan-system-secondary mx-auto rounded-full mb-10"></div>
           <p className="max-w-2xl mx-auto text-gray-400 text-base md:text-lg leading-relaxed opacity-80">
-            {t('contactExpertsDesc') || 'Have a project in mind or need expert DX advice? Reach out to our team and let\'s build something exceptional together.'}
+            Have a project in mind or need expert DX advice? Reach out to our team and let's build something exceptional together.
           </p>
         </motion.div>
 
@@ -134,7 +120,7 @@ const Contact = () => {
             <div className="glass-card p-8 md:p-12 bg-white/[0.03] border border-white/10 shadow-2xl relative">
               <div className="mb-10">
                 <h3 className="text-xl md:text-3xl font-black text-white mb-4 uppercase tracking-tight italic">
-                  {t('sendMessage') || 'SEND A MESSAGE'}
+                  SEND A MESSAGE
                 </h3>
                 <p className="text-gray-500 text-sm">We normally respond within 24 hours.</p>
               </div>
@@ -148,7 +134,7 @@ const Contact = () => {
                       type="text" 
                       value={formData.name}
                       onChange={handleChange}
-                      className={`${inputBaseClass} ${errors.name ? 'border-red-500/50' : ''}`}
+                      className={inputBaseClass}
                       placeholder="Enter your name" 
                     />
                   </div>
@@ -159,7 +145,7 @@ const Contact = () => {
                       type="email" 
                       value={formData.email}
                       onChange={handleChange}
-                      className={`${inputBaseClass} ${errors.email ? 'border-red-500/50' : ''}`}
+                      className={inputBaseClass}
                       placeholder="Enter your email" 
                     />
                   </div>
@@ -172,7 +158,7 @@ const Contact = () => {
                     rows="5" 
                     value={formData.message}
                     onChange={handleChange}
-                    className={`${inputBaseClass} resize-none ${errors.message ? 'border-red-500/50' : ''}`}
+                    className={`${inputBaseClass} resize-none`}
                     placeholder="Tell us about your project..."
                   ></textarea>
                 </div>
