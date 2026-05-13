@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { FiTarget, FiEye, FiActivity, FiAward, FiGlobe, FiUsers, FiStar, FiMessageSquare, FiLayers, FiMapPin, FiArrowRight } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import TiltCard from '../components/TiltCard';
 import Magnetic from '../components/Magnetic';
 
