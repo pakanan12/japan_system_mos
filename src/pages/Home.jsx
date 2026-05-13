@@ -1,16 +1,18 @@
 import HeroSection from '../components/HeroSection';
 import Services from '../components/Services';
-import Clients from '../components/Clients';
+import NewsPreview from '../components/NewsPreview';
 
 const Home = () => {
   return (
     <div className="bg-white">
       <HeroSection />
-      <Clients />
+      <NewsPreview />
       <Services />
     </div>
   );
 };
 
 export default Home;
+
+
 
