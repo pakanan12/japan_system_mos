@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiMonitor, FiGlobe, FiBell, FiArrowRight, FiStar, FiShield, FiZap, FiUsers } from 'react-icons/fi';
+import { FiMonitor, FiGlobe, FiBell, FiArrowRight } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import TiltCard from './TiltCard';
@@ -32,12 +32,7 @@ const Services = () => {
     },
   ];
 
-  const whyUs = [
-    { icon: FiStar, title: t('whyJapaneseStandard'), desc: t('whyJapaneseStandardDesc') },
-    { icon: FiShield, title: t('whyBilingual'), desc: t('whyBilingualDesc') },
-    { icon: FiZap, title: t('whyFullService'), desc: t('whyFullServiceDesc') },
-    { icon: FiUsers, title: t('whyLocalExpert'), desc: t('whyLocalExpertDesc') },
-  ];
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -108,72 +103,6 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Why Choose Us & Stats */}
-      <section className="py-32 bg-japan-system-primary relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]"></div>
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-japan-system-secondary/10 rounded-full blur-[100px]"></div>
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-[100px]"></div>
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-24">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="text-japan-system-secondary text-sm font-bold uppercase tracking-[0.4em] mb-4 block">
-                {t('whyChooseUs')}
-              </span>
-              <h2 className="text-white mb-8 leading-tight">
-                {t('whyChooseUsDesc')}
-              </h2>
-              <div className="w-20 h-1.5 bg-japan-system-secondary rounded-full"></div>
-            </motion.div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              {whyUs.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl hover:bg-white/10 transition-colors"
-                >
-                  <item.icon className="w-8 h-8 text-japan-system-secondary mb-6" />
-                  <h4 className="text-lg font-bold text-white mb-3">{item.title}</h4>
-                  <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Luxury Stats Card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="glass-card p-12 md:p-16 border-white/10 bg-white/5 text-white overflow-hidden group"
-          >
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center relative z-10">
-              {[
-                { count: '200+', label: t('clients') },
-                { count: '9+', label: t('yearsExp') },
-                { count: '3', label: t('countries') },
-                { count: '1000+', label: t('deployments') },
-              ].map((stat, i) => (
-                <div key={i}>
-                  <div className="text-4xl md:text-6xl font-bold text-japan-system-secondary mb-3 group-hover:scale-110 transition-transform duration-700">
-                    {stat.count}
-                  </div>
-                  <div className="text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] text-white/50">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
       </section>
 
       {/* Luxury Contact CTA */}
@@ -206,5 +135,6 @@ const Services = () => {
 };
 
 export default Services;
+
 
 

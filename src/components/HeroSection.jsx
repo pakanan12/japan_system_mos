@@ -19,7 +19,7 @@ const HeroSection = () => {
         className="absolute inset-0 z-0"
       >
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 animate-slow-zoom"
+          className="absolute inset-0 bg-cover bg-[center_15%] bg-no-repeat scale-105"
           style={{ backgroundImage: "url('/hero-japan.jpg')" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>

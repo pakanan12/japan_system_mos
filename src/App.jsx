@@ -3,8 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import CustomCursor from './components/CustomCursor';
-import MouseAura from './components/MouseAura';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Company from './pages/Company';
@@ -62,8 +60,6 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <CustomCursor />
-      <MouseAura />
       <div className="relative min-h-screen flex flex-col font-sans overflow-hidden">
         {/* Global Background Elements */}
         <div className="fixed inset-0 noise-bg pointer-events-none z-[1]"></div>
@@ -80,4 +76,5 @@ function App() {
 }
 
 export default App;
+
 
