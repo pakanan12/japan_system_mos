@@ -20,20 +20,7 @@ const Company = () => {
     { label: t('email'), value: 'info@jpsys-th.com' },
   ];
 
-  const timeline = [
-    { year: '2015', event: t('timeline1') },
-    { year: '2017', event: t('timeline2') },
-    { year: '2019', event: t('timeline3') },
-    { year: '2021', event: t('timeline4') },
-    { year: '2023', event: t('timeline5') }
-  ];
 
-  const whyUs = [
-    { icon: FiStar, title: t('whyJapaneseStandard'), desc: t('whyJapaneseStandardDesc') },
-    { icon: FiMessageSquare, title: t('whyBilingual'), desc: t('whyBilingualDesc') },
-    { icon: FiLayers, title: t('whyFullService'), desc: t('whyFullServiceDesc') },
-    { icon: FiMapPin, title: t('whyLocalExpert'), desc: t('whyLocalExpertDesc') },
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -85,9 +72,9 @@ const Company = () => {
           <div className="relative">
             <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100 bg-white p-12">
               <img 
-                src="/company-logo.png" 
-                alt="Japan System Logo" 
-                className="w-full h-80 object-contain"
+                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" 
+                alt="Office" 
+                className="w-full h-80 object-cover"
               />
             </div>
           </div>
