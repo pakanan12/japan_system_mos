@@ -14,7 +14,7 @@
     @apply font-bold tracking-tight text-japan-system-primary;
   }
   h1 {
-    @apply text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tighter;
+    @apply text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tighter;
   }
   h2 {
     @apply text-3xl md:text-5xl leading-tight tracking-tight;

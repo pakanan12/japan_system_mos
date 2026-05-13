@@ -44,11 +44,11 @@ const HeroSection = () => {
             
             <h1 className="mb-10 text-japan-system-primary leading-[1.1]">
               {lang.startsWith('th') ? (
-                <>มอบทางเลือก <span className="text-gradient">DX</span> ที่ดีที่สุด<br/><span className="text-4xl md:text-6xl">เพื่อการเติบโตของธุรกิจคุณ</span></>
+                <>มอบทางเลือก <span className="text-gradient">DX</span> ที่ดีที่สุด<br/><span className="text-3xl md:text-5xl">เพื่อการเติบโตของธุรกิจคุณ</span></>
               ) : lang.startsWith('ja') ? (
                 <>ビジネスの成長に最適な<br/><span className="text-gradient">DX</span>ソリューションを提供</>
               ) : (
-                <>Optimal <span className="text-gradient">DX</span> Solutions<br/><span className="text-4xl md:text-6xl">for Your Business Growth</span></>
+                <>Optimal <span className="text-gradient">DX</span> Solutions<br/><span className="text-3xl md:text-5xl">for Your Business Growth</span></>
               )}
             </h1>
 
@@ -69,7 +69,7 @@ const HeroSection = () => {
 
               <Magnetic>
                 <button 
-                  onClick={() => document.getElementById('news-preview')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
                   className="px-10 py-5 bg-white border border-gray-100 text-japan-system-primary font-bold rounded-2xl hover:border-japan-system-secondary hover:text-japan-system-secondary transition-all duration-300 shadow-sm hover:shadow-lg"
                 >
                   {t('learnMore')}
@@ -106,7 +106,7 @@ const HeroSection = () => {
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 cursor-pointer text-gray-300 flex flex-col items-center gap-2"
-        onClick={() => document.getElementById('news-preview')?.scrollIntoView({ behavior: 'smooth' })}
+        onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
       >
         <span className="text-[10px] font-bold uppercase tracking-[0.3em]">{t('discover')}</span>
         <FiChevronDown className="w-6 h-6" />
