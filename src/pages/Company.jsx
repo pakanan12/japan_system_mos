@@ -72,9 +72,9 @@ const Company = () => {
           <div className="relative">
             <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100 bg-white p-12">
               <img 
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" 
-                alt="Office" 
-                className="w-full h-80 object-cover"
+                src="/company-logo.png" 
+                alt="Japan System Logo" 
+                className="w-full h-80 object-contain"
               />
             </div>
           </div>
