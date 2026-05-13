@@ -20,7 +20,7 @@ const HeroSection = () => {
       >
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110 animate-slow-zoom"
-          style={{ backgroundImage: "url('/hero_bg.png')" }}
+          style={{ backgroundImage: "url('/hero-japan.jpg')" }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
         <div className="absolute inset-0 bg-radial-vignette opacity-30"></div>
@@ -100,7 +100,7 @@ const HeroSection = () => {
             <div className="relative z-10 glass-card p-4 rotate-3 hover:rotate-0 transition-transform duration-1000">
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="/hero_bg.png" 
+                  src="/hero-japan.jpg" 
                   alt="Corporate DX" 
                   className="w-full h-[600px] object-cover hover:scale-105 transition-transform duration-1000"
                 />
