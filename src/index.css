@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer base {
   body {
-    @apply font-sans antialiased font-normal bg-japan-system-bg;
+    @apply font-sans antialiased font-normal bg-white;
     color: #111111;
     line-height: 1.6;
     overflow-x: hidden;
@@ -11,40 +11,39 @@
     -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight text-japan-system-text;
-    color: #111111;
+    @apply font-bold tracking-tight text-japan-system-primary;
   }
   h1 {
-    @apply text-4xl md:text-5xl lg:text-7xl leading-[1.1];
+    @apply text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tighter;
   }
   h2 {
-    @apply text-3xl md:text-4xl leading-snug;
+    @apply text-3xl md:text-5xl leading-tight tracking-tight;
   }
   h3 {
-    @apply text-xl md:text-2xl;
+    @apply text-xl md:text-2xl font-bold;
   }
   p {
-    @apply text-base md:text-lg font-normal leading-relaxed text-gray-700;
+    @apply text-base md:text-lg font-normal leading-relaxed text-gray-600;
   }
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100;
+    @apply bg-transparent;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+    @apply bg-japan-system-primary/20 rounded-full hover:bg-japan-system-primary/40 transition-colors;
   }
 }
 @layer utilities {
   .glass-card {
-    @apply bg-white border border-gray-100 shadow-sm rounded-2xl transition-all duration-500 ease-out;
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] rounded-3xl transition-all duration-700 ease-out;
   }
   .glass-card-hover {
-    @apply hover:shadow-xl hover:-translate-y-2 hover:border-blue-100;
+    @apply hover:shadow-[0_20px_50px_rgba(30,58,95,0.1)] hover:-translate-y-3 hover:border-japan-system-secondary/30;
   }
   .luxury-button {
-    @apply relative overflow-hidden bg-japan-system-primary text-white font-bold px-8 py-4 rounded-xl shadow-md transition-all duration-300 hover:bg-japan-system-secondary hover:shadow-lg active:scale-[0.98] inline-flex items-center justify-center;
+    @apply relative overflow-hidden bg-japan-system-primary text-white font-bold px-10 py-5 rounded-2xl shadow-xl transition-all duration-500 hover:shadow-japan-system-secondary/20 active:scale-[0.97] inline-flex items-center justify-center;
   }
   .shine-effect {
     @apply relative overflow-hidden;
@@ -55,34 +54,40 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.4),
       transparent
     );
-    transition: transform 0.6s ease-in-out;
+    transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
   }
   .shine-effect:hover::after {
     @apply translate-x-full;
   }
   .floating {
-    animation: float 6s ease-in-out infinite;
+    animation: float 8s ease-in-out infinite;
   }
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-15px) rotate(1deg); }
+    66% { transform: translateY(5px) rotate(-1deg); }
   }
   .bg-grid-pattern {
-    background-image: radial-gradient(#1E3A5F 1px, transparent 1px);
-    background-size: 40px 40px;
-    @apply opacity-[0.02];
+    background-image: 
+      linear-gradient(to right, rgba(30, 58, 95, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30, 58, 95, 0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
   }
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-japan-system-primary to-japan-system-secondary;
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-japan-system-primary via-japan-system-primary to-japan-system-secondary;
   }
-  .bg-radial-vignette {
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);
+  .noise-bg {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.02;
   }
-  .perspective-1000 {
-    perspective: 1000px;
+  .text-glow {
+    text-shadow: 0 0 30px rgba(77, 168, 218, 0.3);
+  }
+  .perspective-2000 {
+    perspective: 2000px;
   }
 }
 .page-enter {
@@ -118,6 +123,44 @@ html {
   background: #4DA8DA33;
   color: #1a3c5e;
 }
+
+/* Shine Effect for Cards */
+.glass-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 300%;
+  height: 300%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0) 55%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.glass-card:hover::after {
+  top: 100%;
+  left: 100%;
+}
+
+.shine-effect {
+  position: relative;
+  overflow: hidden;
+}
+
 html {
   scrollbar-gutter: stable;
 }

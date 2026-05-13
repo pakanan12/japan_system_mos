@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { FiTarget, FiEye, FiActivity, FiAward, FiGlobe, FiUsers, FiStar, FiMessageSquare, FiLayers, FiMapPin } from 'react-icons/fi';
+import { FiTarget, FiEye, FiActivity, FiAward, FiGlobe, FiUsers, FiStar, FiMessageSquare, FiLayers, FiMapPin, FiArrowRight } from 'react-icons/fi';
 import TiltCard from '../components/TiltCard';
+import Magnetic from '../components/Magnetic';
 
 const Company = () => {
   const { t } = useTranslation();
@@ -33,123 +34,138 @@ const Company = () => {
     { icon: FiMapPin, title: t('whyLocalExpert'), desc: t('whyLocalExpertDesc') },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   return (
-    <div className="relative min-h-screen bg-japan-system-bg overflow-hidden pt-24 md:pt-32 pb-20 md:pb-32">
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-fixed opacity-[0.08] md:opacity-[0.12] scale-105"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-japan-system-bg/95 via-japan-system-bg/60 to-japan-system-bg/95"></div>
-        <div className="absolute inset-0 bg-radial-vignette opacity-50"></div>
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.1] md:opacity-[0.2]"></div>
+    <div className="relative min-h-screen bg-white overflow-hidden pb-32">
+      {/* Cinematic Header */}
+      <div className="relative h-[60vh] flex items-center justify-center overflow-hidden bg-japan-system-primary">
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-30 scale-110"
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80')" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-japan-system-primary/50"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        </div>
         
-        <div className="absolute top-[10%] right-[10%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-blue-100/20 rounded-full blur-[80px] md:blur-[120px]"></div>
-        <div className="absolute bottom-[10%] left-[5%] w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-indigo-50/30 rounded-full blur-[60px] md:blur-[100px]"></div>
+        <div className="relative z-10 text-center max-w-4xl px-6">
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-japan-system-secondary text-sm font-bold uppercase tracking-[0.4em] mb-6 block"
+          >
+            {t('ourIdentity')}
+          </motion.span>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-white mb-8"
+          >
+            Corporate <span className="text-japan-system-secondary">{t('profileLabel')}</span>
+          </motion.h1>
+          <motion.div 
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ delay: 0.4, duration: 1 }}
+            className="w-24 h-1.5 bg-japan-system-secondary mx-auto rounded-full"
+          ></motion.div>
+        </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 -mt-24">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12 md:mb-24"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="glass-card p-12 md:p-20 border-white/50 bg-white/80 backdrop-blur-2xl mb-32 shadow-2xl"
         >
-          <span className="text-japan-system-secondary text-[10px] md:text-sm font-black uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 block">
-            {t('ourIdentity')}
-          </span>
-          <h1 className="text-2xl md:text-6xl font-black text-japan-system-primary mb-6 tracking-tight px-4 md:px-0 leading-[1.2]">
-            Corporate <span className="text-gradient">{t('profileLabel')}</span>
-          </h1>
-          <div className="w-12 md:w-24 h-1 md:h-1.5 bg-japan-system-secondary mx-auto rounded-full mb-6 md:mb-10"></div>
-          <p className="max-w-3xl mx-auto text-gray-600 text-sm md:text-xl leading-relaxed px-4 md:px-2">
-            {t('companyIntroDesc')}
-          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <h2 className="text-japan-system-primary mb-8 leading-tight">
+                {t('companyIntroTitle') || 'Driving Digital Innovation with Japanese Standards'}
+              </h2>
+              <p className="text-gray-500 text-lg md:text-xl leading-relaxed mb-10 opacity-80">
+                {t('companyIntroDesc')}
+              </p>
+              <div className="flex gap-8">
+                <div>
+                  <div className="text-4xl font-bold text-japan-system-primary">9+</div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-japan-system-secondary mt-1">{t('yearsExp')}</div>
+                </div>
+                <div className="w-[1px] h-12 bg-gray-100"></div>
+                <div>
+                  <div className="text-4xl font-bold text-japan-system-primary">200+</div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-japan-system-secondary mt-1">{t('clients')}</div>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="rounded-3xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-1000 border-8 border-white">
+                <img 
+                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" 
+                  alt="Office" 
+                  className="w-full h-80 object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-japan-system-secondary/10 rounded-full blur-3xl -z-10"></div>
+            </div>
+          </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-16 md:mb-32">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="glass-card p-6 md:p-12 h-full bg-white group hover:border-japan-system-secondary/30 transition-all duration-500">
-              <div className="flex items-center md:block mb-4 md:mb-8">
-                <div className="w-10 h-10 md:w-16 md:h-16 bg-blue-50 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:bg-japan-system-primary transition-all duration-500 shadow-sm shrink-0">
-                  <FiTarget className="w-4 h-4 md:w-7 md:h-7 text-japan-system-primary group-hover:text-white transition-colors duration-500" />
-                </div>
-                <h3 className="ml-4 md:ml-0 text-lg md:text-3xl font-black text-japan-system-primary tracking-tight uppercase">{t('mission')}</h3>
+        {/* Mission & Vision */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-32">
+          {[
+            { icon: FiTarget, title: t('mission'), desc: t('missionDesc'), color: 'secondary' },
+            { icon: FiEye, title: t('vision'), desc: t('visionDesc'), color: 'primary' }
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: i === 0 ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="glass-card p-12 hover:glass-card-hover border-white group"
+            >
+              <div className="w-16 h-16 bg-japan-system-primary/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-japan-system-primary transition-all duration-500">
+                <item.icon className="w-8 h-8 text-japan-system-primary group-hover:text-white transition-colors" />
               </div>
-              <p className="text-gray-600 text-[12px] md:text-lg leading-relaxed px-2 md:px-0">
-                {t('missionDesc')}
+              <h3 className="text-3xl font-bold text-japan-system-primary mb-6 group-hover:text-japan-system-secondary transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-gray-500 text-lg leading-relaxed opacity-80">
+                {item.desc}
               </p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <div className="glass-card p-6 md:p-12 h-full bg-white group hover:border-japan-system-secondary/30 transition-all duration-500">
-              <div className="flex items-center md:block mb-4 md:mb-8">
-                <div className="w-10 h-10 md:w-16 md:h-16 bg-blue-50 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:bg-japan-system-primary transition-all duration-500 shadow-sm shrink-0">
-                  <FiEye className="w-4 h-4 md:w-7 md:h-7 text-japan-system-primary group-hover:text-white transition-colors duration-500" />
-                </div>
-                <h3 className="ml-4 md:ml-0 text-lg md:text-3xl font-black text-japan-system-primary tracking-tight uppercase">{t('vision')}</h3>
-              </div>
-              <p className="text-gray-600 text-[12px] md:text-lg leading-relaxed px-2 md:px-0">
-                {t('visionDesc')}
-              </p>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
 
+        {/* Company Details Table */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 md:mb-32"
+          className="mb-32 overflow-hidden"
         >
-          <div className="text-center mb-10 md:mb-16 px-4">
-            <span className="text-japan-system-secondary text-[9px] md:text-xs font-black uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 block">{t('whyChooseUs')}</span>
-            <h2 className="text-xl md:text-3xl font-black text-japan-system-primary tracking-tight uppercase">{t('whyChooseUsDesc')}</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-2 md:px-0">
-            {whyUs.map((item, i) => (
-              <TiltCard key={i} tiltMaxAngleX={3} tiltMaxAngleY={3} className="h-full">
-                <div className="glass-card p-6 md:p-8 h-full flex items-start md:flex-col group hover:border-japan-system-secondary/30 transition-all duration-500">
-                  <div className="w-10 h-10 md:w-14 md:h-14 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-japan-system-primary transition-all duration-500 shrink-0">
-                    <item.icon className="w-4 h-4 md:w-6 md:h-6 text-japan-system-primary group-hover:text-white transition-colors" />
-                  </div>
-                  <div className="ml-4 md:ml-0 md:mt-6">
-                    <h4 className="text-base font-black text-japan-system-primary mb-2 group-hover:text-japan-system-secondary transition-colors">{item.title}</h4>
-                    <p className="text-gray-500 text-[11px] md:text-sm leading-relaxed line-clamp-3 md:line-clamp-none">{item.desc}</p>
-                  </div>
-                </div>
-              </TiltCard>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16 md:mb-32 overflow-hidden mx-2 md:mx-0"
-        >
-          <div className="glass-card overflow-hidden border-white shadow-2xl">
-            <div className="p-6 md:p-10 bg-japan-system-primary text-white text-center md:text-left">
-              <h3 className="text-lg md:text-2xl font-black uppercase tracking-widest">{t('companyInfoTitle')}</h3>
+          <div className="glass-card border-white shadow-2xl">
+            <div className="p-10 bg-japan-system-primary text-white">
+              <h3 className="text-2xl font-bold tracking-tight uppercase">{t('companyInfoTitle')}</h3>
             </div>
-            <div className="divide-y divide-gray-50 bg-white">
+            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-100 bg-white/50 backdrop-blur">
               {companyInfo.map((info, i) => (
-                <div key={i} className="grid grid-cols-1 md:grid-cols-3 p-5 md:p-8 hover:bg-gray-50 transition-colors">
-                  <span className="text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-japan-system-secondary mb-1 md:mb-0 md:col-span-1 flex items-center">
+                <div key={i} className="p-8 hover:bg-gray-50/50 transition-colors flex flex-col justify-center">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-japan-system-secondary mb-3">
                     {info.label}
                   </span>
-                  <p className="text-japan-system-primary text-[13px] md:text-base font-bold md:col-span-2 leading-tight">
+                  <p className="text-japan-system-primary text-lg font-bold">
                     {info.value}
                   </p>
                 </div>
@@ -158,20 +174,18 @@ const Company = () => {
           </div>
         </motion.div>
 
-        <div className="mb-16 md:mb-32 px-4 md:px-0">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-10 md:mb-20"
-          >
-            <h2 className="text-xl md:text-3xl font-black text-japan-system-primary uppercase tracking-tight">{t('ourJourney')}</h2>
-            <div className="w-12 h-1 bg-japan-system-secondary mx-auto mt-3 md:mt-4 rounded-full"></div>
-          </motion.div>
+        {/* Timeline Section */}
+        <div className="mb-32">
+          <div className="text-center mb-20">
+            <span className="text-japan-system-secondary text-sm font-bold uppercase tracking-[0.4em] mb-4 block">
+              {t('ourJourney')}
+            </span>
+            <h2 className="text-japan-system-primary">{t('evolution')}</h2>
+          </div>
 
-          <div className="relative max-w-4xl mx-auto">
-            <div className="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-gray-200 hidden md:block"></div>
-            <div className="space-y-8 md:space-y-12">
+          <div className="relative max-w-4xl mx-auto px-4">
+            <div className="absolute left-1/2 -translate-x-1/2 h-full w-[1px] bg-gray-100 hidden md:block"></div>
+            <div className="space-y-16">
               {timeline.map((item, idx) => (
                 <motion.div
                   key={idx}
@@ -179,29 +193,29 @@ const Company = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className={`flex flex-col md:flex-row items-center gap-4 md:gap-8 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
+                  className={`flex flex-col md:flex-row items-center gap-12 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
                 >
-                  <div className="flex-1 text-center md:text-right w-full">
-                    {idx % 2 === 0 && (
-                      <div className="md:pr-4">
-                        <span className="text-lg md:text-2xl font-black text-japan-system-secondary">{item.year}</span>
-                        <p className="text-gray-600 mt-0.5 md:mt-2 font-medium text-[13px] md:text-base">{item.event}</p>
+                  <div className="flex-1 text-center md:text-right">
+                    {idx % 2 === 0 ? (
+                      <div>
+                        <span className="text-3xl font-bold text-japan-system-secondary">{item.year}</span>
+                        <p className="text-gray-600 mt-4 text-lg font-medium">{item.event}</p>
                       </div>
-                    )}
+                    ) : null}
                   </div>
-                  <div className="w-8 h-8 md:w-12 md:h-12 bg-white border-[3px] md:border-4 border-japan-system-secondary rounded-full flex items-center justify-center z-10 shadow-lg shrink-0">
-                    <FiActivity className="text-japan-system-primary w-3 h-3 md:w-5 md:h-5" />
+                  <div className="w-12 h-12 bg-white border-2 border-japan-system-secondary rounded-full flex items-center justify-center z-10 shadow-xl shrink-0">
+                    <div className="w-4 h-4 bg-japan-system-primary rounded-full"></div>
                   </div>
-                  <div className="flex-1 text-center md:text-left w-full">
+                  <div className="flex-1 text-center md:text-left">
                     {idx % 2 !== 0 ? (
-                      <div className="md:pl-4">
-                        <span className="text-lg md:text-2xl font-black text-japan-system-secondary">{item.year}</span>
-                        <p className="text-gray-600 mt-0.5 md:mt-2 font-medium text-[13px] md:text-base">{item.event}</p>
+                      <div>
+                        <span className="text-3xl font-bold text-japan-system-secondary">{item.year}</span>
+                        <p className="text-gray-600 mt-4 text-lg font-medium">{item.event}</p>
                       </div>
                     ) : (
                       <div className="md:hidden">
-                        <span className="text-lg font-black text-japan-system-secondary">{item.year}</span>
-                        <p className="text-gray-600 mt-0.5 font-medium text-[13px]">{item.event}</p>
+                        <span className="text-2xl font-bold text-japan-system-secondary">{item.year}</span>
+                        <p className="text-gray-600 mt-2 font-medium">{item.event}</p>
                       </div>
                     )}
                   </div>
@@ -211,23 +225,31 @@ const Company = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 px-2 md:px-0">
-          {[
-            { icon: FiUsers, count: '200+', label: t('clients') },
-            { icon: FiGlobe, count: '3', label: t('countries') },
-            { icon: FiAward, count: '9+', label: t('yearsExp') },
-            { icon: FiActivity, count: '1000+', label: t('deployments') }
-          ].map((stat, i) => (
-            <div key={i} className="text-center p-5 md:p-8 glass-card bg-white/50 backdrop-blur">
-              <stat.icon className="w-5 h-5 md:w-8 md:h-8 text-japan-system-secondary mx-auto mb-2 md:mb-4" />
-              <div className="text-xl md:text-3xl font-black text-japan-system-primary mb-1 md:mb-2">{stat.count}</div>
-              <div className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-gray-400">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+        {/* Contact Final CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="glass-card p-16 bg-gradient-to-br from-japan-system-primary to-japan-system-primary/90 text-white text-center relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+          <h2 className="text-white mb-8 relative z-10">{t('readyToGrow')}</h2>
+          <p className="text-white/70 text-xl mb-12 max-w-2xl mx-auto relative z-10">
+            {t('contactUs')}
+          </p>
+          <div className="flex justify-center relative z-10">
+            <Magnetic>
+              <Link to="/contact" className="luxury-button px-20 text-lg hover:bg-japan-system-secondary transition-colors duration-500">
+                <span>{t('contact')}</span>
+                <FiArrowRight className="ml-2" />
+              </Link>
+            </Magnetic>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
 export default Company;
+

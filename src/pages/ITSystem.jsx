@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { FiSettings, FiMonitor, FiHeadphones, FiBox, FiCheckCircle, FiShield, FiZap, FiCpu, FiServer, FiGrid, FiActivity } from 'react-icons/fi';
+import { FiSettings, FiMonitor, FiHeadphones, FiBox, FiCheckCircle, FiShield, FiZap, FiCpu, FiServer, FiGrid, FiActivity, FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import TiltCard from '../components/TiltCard';
+import Magnetic from '../components/Magnetic';
 
 const ITSystem = () => {
   const { t } = useTranslation();
@@ -58,129 +59,147 @@ const ITSystem = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.05 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
+
   return (
-    <div className="relative min-h-screen bg-japan-system-bg overflow-hidden pt-24 md:pt-32 pb-20 md:pb-32">
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-fixed opacity-[0.1] md:opacity-[0.15] scale-105"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1920&q=80')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-japan-system-bg/90 via-japan-system-bg/70 to-japan-system-bg/95"></div>
-        <div className="absolute inset-0 bg-radial-vignette opacity-50"></div>
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.1] md:opacity-[0.2]"></div>
-      </div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12 md:mb-24"
-        >
-          <span className="text-japan-system-secondary text-[10px] md:text-sm font-black uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 block">
+    <div className="relative min-h-screen bg-white overflow-hidden pb-32">
+      {/* Cinematic Header */}
+      <div className="relative h-[50vh] flex items-center justify-center overflow-hidden bg-japan-system-primary">
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-30"
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1920&q=80')" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-japan-system-primary/50"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        </div>
+        
+        <div className="relative z-10 text-center max-w-4xl px-6">
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-japan-system-secondary text-sm font-bold uppercase tracking-[0.4em] mb-6 block"
+          >
             {t('enterpriseSolutions')}
-          </span>
-          <h1 className="text-2xl md:text-6xl font-black text-japan-system-primary mb-6 tracking-tight px-4 md:px-0 leading-[1.2]">
-            IT Systems <span className="text-gradient">{t('servicesSuffix')}</span>
-          </h1>
-          <div className="w-12 md:w-24 h-1 md:h-1.5 bg-japan-system-secondary mx-auto rounded-full mb-6 md:mb-10"></div>
-          <p className="max-w-3xl mx-auto text-gray-600 text-sm md:text-xl leading-relaxed px-4 md:px-2">
+          </motion.span>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-white mb-8"
+          >
+            IT Systems <span className="text-japan-system-secondary">{t('servicesSuffix')}</span>
+          </motion.h1>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 -mt-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-24"
+        >
+          <p className="max-w-3xl mx-auto text-gray-500 text-xl md:text-2xl leading-relaxed font-medium">
             {t('itSystemDesc')}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-32 px-2 md:px-0">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-32"
+        >
           {services.map((service, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.05 }}
-            >
-              <TiltCard tiltMaxAngleX={3} tiltMaxAngleY={3} className="h-full">
-                <Link to="/contact" className="block h-full cursor-pointer">
-                  <div className="glass-card p-6 md:p-8 h-full flex items-start md:flex-col group hover:border-japan-system-secondary/30 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
-                    <div className="w-10 h-10 md:w-14 md:h-14 bg-gray-50 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:bg-japan-system-primary transition-all duration-500 shadow-sm shrink-0">
-                      <service.icon className="w-4 h-4 md:w-6 md:h-6 text-japan-system-primary group-hover:text-white transition-colors duration-500" />
+            <motion.div key={idx} variants={itemVariants}>
+              <TiltCard className="h-full">
+                <Link to="/contact" className="block h-full">
+                  <div className="glass-card shine-effect p-8 h-full flex flex-col group hover:glass-card-hover border-white/50">
+                    <div className="w-14 h-14 bg-japan-system-primary/5 rounded-xl flex items-center justify-center mb-6 group-hover:bg-japan-system-primary transition-all duration-500 shadow-sm">
+                      <service.icon className="w-6 h-6 text-japan-system-primary group-hover:text-white transition-colors" />
                     </div>
-                    <div className="ml-5 md:ml-0 md:mt-8 flex-grow">
-                      <h3 className="text-base md:text-lg font-black text-japan-system-primary mb-2 md:mb-3 group-hover:text-japan-system-secondary transition-colors">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-600 text-[11px] md:text-sm leading-relaxed mb-4 line-clamp-3 md:line-clamp-none">
-                        {service.desc}
-                      </p>
-                      <ul className="space-y-1.5 md:space-y-2">
-                        {service.features.map((feature, i) => (
-                          <li key={i} className="flex items-center text-[10px] md:text-xs text-gray-500 font-medium group-hover:text-japan-system-primary transition-colors">
-                            <FiCheckCircle className="text-japan-system-secondary mr-2 w-3 h-3 md:w-3.5 md:h-3.5 shrink-0" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <h3 className="text-xl font-bold text-japan-system-primary mb-4 group-hover:text-japan-system-secondary transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-6 opacity-80">
+                      {service.desc}
+                    </p>
+                    <ul className="mt-auto space-y-2">
+                      {service.features.map((feature, i) => (
+                        <li key={i} className="flex items-center text-[10px] text-gray-400 font-bold uppercase tracking-wider group-hover:text-japan-system-primary transition-colors">
+                          <FiCheckCircle className="text-japan-system-secondary mr-2 w-3.5 h-3.5" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </Link>
               </TiltCard>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-32">
+        {/* Feature Grid Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-32">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-1 glass-card p-8 md:p-12 bg-japan-system-primary text-white flex flex-col justify-center text-center lg:text-left mx-2 md:mx-0"
+            className="lg:col-span-1 glass-card p-12 bg-japan-system-primary text-white flex flex-col justify-center border-white/10"
           >
-            <h2 className="text-xl md:text-3xl font-black mb-5 md:mb-6 tracking-tight uppercase italic px-4 md:px-0">
+            <h2 className="text-white mb-8 leading-tight">
               {t('ourLabel')} <span className="text-japan-system-secondary">{t('supportLabel')}</span> {t('standardsLabel')}
             </h2>
-            <p className="text-white/70 text-[13px] md:text-base mb-8 leading-relaxed px-2 md:px-0">
+            <p className="text-white/60 text-lg mb-10 leading-relaxed">
               {t('supportStandardsDesc')}
             </p>
-            <Link to="/contact" className="text-[10px] md:text-sm font-black uppercase tracking-widest text-japan-system-secondary hover:text-white transition-colors flex items-center justify-center lg:justify-start">
-              {t('connectExperts')} <FiZap className="ml-2" />
-            </Link>
+            <Magnetic>
+              <Link to="/contact" className="text-sm font-bold uppercase tracking-widest text-japan-system-secondary hover:text-white transition-colors flex items-center">
+                {t('connectExperts')} <FiZap className="ml-2" />
+              </Link>
+            </Magnetic>
           </motion.div>
 
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 px-2 md:px-0">
-            <div className="glass-card p-6 md:p-8 hover:shadow-lg transition-all duration-300 flex items-start md:block">
-              <FiShield className="w-8 h-8 md:w-10 md:h-10 text-japan-system-secondary mb-0 md:mb-6 shrink-0" />
-              <div className="ml-5 md:ml-0">
-                <h4 className="text-base md:text-xl font-black text-japan-system-primary mb-2 md:mb-4 uppercase">{t('securityFirst')}</h4>
-                <p className="text-gray-600 text-[12px] md:text-sm leading-relaxed">{t('securityFirstDesc')}</p>
+          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {[
+              { icon: FiShield, title: t('securityFirst'), desc: t('securityFirstDesc') },
+              { icon: FiZap, title: t('rapidResponse'), desc: t('rapidResponseDesc') },
+              { icon: FiSettings, title: t('itPlanning'), desc: t('itPlanningDesc'), full: true },
+            ].map((feature, i) => (
+              <div key={i} className={`glass-card p-10 hover:glass-card-hover border-white ${feature.full ? 'sm:col-span-2' : ''}`}>
+                <feature.icon className="w-12 h-12 text-japan-system-secondary mb-8" />
+                <h4 className="text-2xl font-bold text-japan-system-primary mb-4 uppercase">{feature.title}</h4>
+                <p className="text-gray-500 text-lg leading-relaxed opacity-80">{feature.desc}</p>
               </div>
-            </div>
-            <div className="glass-card p-6 md:p-8 hover:shadow-lg transition-all duration-300 flex items-start md:block">
-              <FiZap className="w-8 h-8 md:w-10 md:h-10 text-japan-system-secondary mb-0 md:mb-6 shrink-0" />
-              <div className="ml-5 md:ml-0">
-                <h4 className="text-base md:text-xl font-black text-japan-system-primary mb-2 md:mb-4 uppercase">{t('rapidResponse')}</h4>
-                <p className="text-gray-600 text-[12px] md:text-sm leading-relaxed">{t('rapidResponseDesc')}</p>
-              </div>
-            </div>
-            <div className="glass-card p-6 md:p-8 hover:shadow-lg transition-all duration-300 sm:col-span-2 flex items-start md:block">
-              <FiSettings className="w-8 h-8 md:w-10 md:h-10 text-japan-system-secondary mb-0 md:mb-6 shrink-0" />
-              <div className="ml-5 md:ml-0">
-                <h4 className="text-base md:text-xl font-black text-japan-system-primary mb-2 md:mb-4 uppercase">{t('itPlanning')}</h4>
-                <p className="text-gray-600 text-[12px] md:text-sm leading-relaxed">{t('itPlanningDesc')}</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
+        {/* Final IT CTA */}
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="glass-card p-8 md:p-12 border-white bg-white/50 backdrop-blur shadow-xl text-center mx-2 md:mx-0"
+          className="glass-card p-16 bg-white/50 backdrop-blur-2xl border-white shadow-2xl text-center"
         >
-          <h3 className="text-lg md:text-2xl font-black text-japan-system-primary mb-3 md:mb-4 tracking-tight uppercase px-4 md:px-0">{t('maintenancePackage')}</h3>
-          <p className="text-gray-500 text-[12px] md:text-base mb-8 md:mb-10 max-w-2xl mx-auto px-4 md:px-0">{t('maintenancePackageDesc')}</p>
-          <Link to="/contact" className="luxury-button w-full sm:w-auto sm:min-w-[220px] text-xs py-4 flex md:inline-flex justify-center items-center">
-            {t('viewPricing')}
-          </Link>
+          <h3 className="text-3xl font-bold text-japan-system-primary mb-6 tracking-tight uppercase">{t('maintenancePackage')}</h3>
+          <p className="text-gray-500 text-xl mb-12 max-w-2xl mx-auto opacity-80">{t('maintenancePackageDesc')}</p>
+          <Magnetic>
+            <Link to="/contact" className="luxury-button px-20 text-lg">
+              <span>{t('viewPricing')}</span>
+              <FiArrowRight className="ml-2" />
+            </Link>
+          </Magnetic>
         </motion.div>
       </div>
     </div>
@@ -188,3 +207,4 @@ const ITSystem = () => {
 };
 
 export default ITSystem;
+

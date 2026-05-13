@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiMail, FiPhone, FiMapPin, FiCheck, FiArrowRight } from 'react-icons/fi';
 import { motion } from 'framer-motion';
+import Magnetic from '../components/Magnetic';
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -47,66 +48,66 @@ const Contact = () => {
     }
   ];
 
-  const inputBaseClass = "w-full px-6 py-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none transition-all duration-300 font-medium text-japan-system-primary placeholder:text-gray-400 focus:border-japan-system-secondary focus:bg-white focus:ring-4 focus:ring-japan-system-secondary/5";
+  const inputBaseClass = "w-full px-8 py-5 bg-white/50 border border-gray-100 rounded-2xl outline-none transition-all duration-300 font-medium text-japan-system-primary placeholder:text-gray-300 focus:border-japan-system-secondary focus:bg-white focus:ring-8 focus:ring-japan-system-secondary/5 backdrop-blur-sm";
 
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden pt-32 pb-20 md:pt-48 md:pb-40">
-      {/* Background Decor */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_-20%,#f8fafc,transparent)] opacity-100"></div>
-        <div className="absolute top-[10%] left-[-10%] w-[400px] md:w-[800px] h-[400px] md:h-[800px] bg-blue-50 rounded-full blur-[120px]"></div>
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.05]"></div>
+    <div className="relative min-h-screen bg-white overflow-hidden pb-32">
+      {/* Cinematic Header */}
+      <div className="relative h-[40vh] flex items-center justify-center overflow-hidden bg-japan-system-primary">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#1e293b,transparent)] opacity-50"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        </div>
+        
+        <div className="relative z-10 text-center max-w-4xl px-6">
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-japan-system-secondary text-sm font-bold uppercase tracking-[0.4em] mb-6 block"
+          >
+            {t('contactPage.subtitle')}
+          </motion.span>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-white mb-4"
+          >
+            {t('contactPage.title')}
+          </motion.h1>
+        </div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16 md:mb-32"
-        >
-          <span className="text-japan-system-secondary text-[10px] md:text-xs font-black uppercase tracking-[0.5em] mb-6 block">
-            {t('contactPage.subtitle')}
-          </span>
-          <h1 className="text-4xl md:text-7xl font-black text-japan-system-primary mb-8 tracking-tight leading-[1.1]">
-            {t('contactPage.title')}
-          </h1>
-          <div className="w-16 h-1 bg-japan-system-secondary mx-auto rounded-full mb-10"></div>
-          <p className="max-w-2xl mx-auto text-gray-500 text-base md:text-lg leading-relaxed">
-            {t('contactPage.expertsDesc')}
-          </p>
-        </motion.div>
-
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 -mt-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Contact Info Cards */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 space-y-6 md:space-y-8"
+            className="lg:col-span-5 space-y-8"
           >
             {contactItems.map((item, i) => (
-              <a 
-                key={i} 
-                href={item.href}
-                target={item.isExternal ? '_blank' : undefined}
-                rel={item.isExternal ? 'noopener noreferrer' : undefined}
-                className="group block"
-              >
-                <div className="bg-white border border-gray-100 p-6 md:p-10 rounded-3xl shadow-sm hover:shadow-xl hover:border-japan-system-secondary/30 transition-all duration-500">
-                  <div className="flex items-center space-x-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-50 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-japan-system-primary group-hover:text-white transition-all duration-500">
-                      <item.icon className="w-5 h-5 md:w-7 md:h-7 text-japan-system-primary group-hover:text-white transition-colors" />
+              <Magnetic key={i}>
+                <a 
+                  href={item.href}
+                  target={item.isExternal ? '_blank' : undefined}
+                  rel={item.isExternal ? 'noopener noreferrer' : undefined}
+                  className="block group"
+                >
+                  <div className="glass-card p-10 flex items-center space-x-8 border-white hover:glass-card-hover">
+                    <div className="w-16 h-16 bg-japan-system-primary/5 rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-japan-system-primary transition-all duration-500">
+                      <item.icon className="w-8 h-8 text-japan-system-primary group-hover:text-white transition-colors" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-[0.3em] text-gray-400 mb-2 block">{item.label}</span>
-                      <p className="text-japan-system-primary font-bold text-sm md:text-lg leading-relaxed group-hover:text-japan-system-secondary transition-colors">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-gray-400 mb-2 block">{item.label}</span>
+                      <p className="text-japan-system-primary font-bold text-lg leading-relaxed group-hover:text-japan-system-secondary transition-colors">
                         {item.val}
                       </p>
                     </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              </Magnetic>
             ))}
           </motion.div>
 
@@ -117,18 +118,18 @@ const Contact = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="lg:col-span-7"
           >
-            <div className="bg-white border border-gray-100 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
-              <div className="mb-10">
-                <h3 className="text-xl md:text-3xl font-black text-japan-system-primary mb-4 uppercase tracking-tight italic">
+            <div className="glass-card p-12 md:p-16 border-white shadow-2xl relative overflow-hidden">
+              <div className="mb-12">
+                <h2 className="text-japan-system-primary mb-4 italic">
                   {t('contactPage.sendMessage')}
-                </h3>
-                <p className="text-gray-500 text-sm">{t('contactPage.formHelp')}</p>
+                </h2>
+                <p className="text-gray-500 text-lg opacity-80">{t('contactPage.formHelp')}</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{t('contactPage.fullName')}</label>
+              <form onSubmit={handleSubmit} className="space-y-8" noValidate>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-japan-system-secondary ml-4">{t('contactPage.fullName')}</label>
                     <input 
                       name="name"
                       type="text" 
@@ -138,8 +139,8 @@ const Contact = () => {
                       placeholder={t('contactPage.enterName')} 
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{t('contactPage.emailAddr')}</label>
+                  <div className="space-y-3">
+                    <label className="text-[10px] font-bold uppercase tracking-widest text-japan-system-secondary ml-4">{t('contactPage.emailAddr')}</label>
                     <input 
                       name="email"
                       type="email" 
@@ -151,8 +152,8 @@ const Contact = () => {
                   </div>
                 </div>
                 
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">{t('contactPage.message')}</label>
+                <div className="space-y-3">
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-japan-system-secondary ml-4">{t('contactPage.message')}</label>
                   <textarea 
                     name="message"
                     rows="5" 
@@ -163,24 +164,28 @@ const Contact = () => {
                   ></textarea>
                 </div>
 
-                <button 
-                  disabled={formStatus === 'sending'}
-                  type="submit" 
-                  className={`luxury-button w-full flex items-center justify-center gap-3 py-5 group transition-all duration-500 text-xs uppercase tracking-widest rounded-2xl shadow-xl ${formStatus === 'success' ? '!bg-green-600' : ''}`}
-                >
-                  {formStatus === 'idle' && (
-                    <>
-                      <span>{t('contactPage.sendBtn')}</span>
-                      <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-                    </>
-                  )}
-                  {formStatus === 'sending' && (
-                    <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }} className="w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
-                  )}
-                  {formStatus === 'success' && (
-                    <span className="flex items-center gap-2"><FiCheck className="w-4 h-4" /> {t('contactPage.messageSent')}</span>
-                  )}
-                </button>
+                <div className="pt-4">
+                  <Magnetic>
+                    <button 
+                      disabled={formStatus === 'sending'}
+                      type="submit" 
+                      className={`luxury-button w-full py-6 group text-sm ${formStatus === 'success' ? '!bg-green-600' : ''}`}
+                    >
+                      {formStatus === 'idle' && (
+                        <>
+                          <span>{t('contactPage.sendBtn')}</span>
+                          <FiArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" />
+                        </>
+                      )}
+                      {formStatus === 'sending' && (
+                        <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }} className="w-6 h-6 border-2 border-white border-t-transparent rounded-full" />
+                      )}
+                      {formStatus === 'success' && (
+                        <span className="flex items-center gap-2"><FiCheck className="w-5 h-5" /> {t('contactPage.messageSent')}</span>
+                      )}
+                    </button>
+                  </Magnetic>
+                </div>
               </form>
             </div>
           </motion.div>
@@ -191,3 +196,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
+import CustomCursor from './components/CustomCursor';
+import MouseAura from './components/MouseAura';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Company from './pages/Company';
@@ -11,9 +13,23 @@ import Marketing from './pages/Marketing';
 import ITSystem from './pages/ITSystem';
 
 const pageVariants = {
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } },
-  exit: { opacity: 0, y: -8, transition: { duration: 0.25, ease: 'easeIn' } }
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      duration: 0.8, 
+      ease: [0.16, 1, 0.3, 1] 
+    } 
+  },
+  exit: { 
+    opacity: 0, 
+    y: -20, 
+    transition: { 
+      duration: 0.4, 
+      ease: [0.7, 0, 0.84, 0] 
+    } 
+  }
 };
 
 const AnimatedRoutes = () => {
@@ -26,7 +42,7 @@ const AnimatedRoutes = () => {
         initial="initial"
         animate="animate"
         exit="exit"
-        style={{ minHeight: '100%' }}
+        className="w-full"
       >
         <Routes location={location}>
           <Route path="/" element={<Home />} />
@@ -46,9 +62,15 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col font-sans bg-gray-50">
+      <CustomCursor />
+      <MouseAura />
+      <div className="relative min-h-screen flex flex-col font-sans overflow-hidden">
+        {/* Global Background Elements */}
+        <div className="fixed inset-0 noise-bg pointer-events-none z-[1]"></div>
+        <div className="fixed inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none z-0"></div>
+        
         <Navbar />
-        <main className="flex-grow">
+        <main className="flex-grow relative z-10">
           <AnimatedRoutes />
         </main>
         <Footer />
@@ -58,3 +80,4 @@ function App() {
 }
 
 export default App;
+

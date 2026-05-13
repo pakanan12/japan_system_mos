@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
-import { FiMonitor, FiBarChart2, FiSearch, FiMail, FiArrowRight } from 'react-icons/fi';
+import { FiMonitor, FiBarChart2, FiSearch, FiMail, FiArrowRight, FiCheck } from 'react-icons/fi';
 import { FaFacebookF, FaInstagram, FaTwitter, FaLine } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import TiltCard from '../components/TiltCard';
+import Magnetic from '../components/Magnetic';
 
 const Marketing = () => {
   const { t } = useTranslation();
@@ -42,128 +43,150 @@ const Marketing = () => {
     { icon: FaLine, label: 'Line', url: 'https://line.me', color: '#06C755' }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+  };
 
   return (
-    <div className="relative min-h-screen bg-japan-system-bg overflow-hidden pt-24 md:pt-32 pb-20 md:pb-32">
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-fixed opacity-[0.08] md:opacity-[0.12] scale-105"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-japan-system-bg/90 via-japan-system-bg/70 to-japan-system-bg/95"></div>
-        <div className="absolute inset-0 bg-radial-vignette opacity-50"></div>
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.1] md:opacity-[0.2]"></div>
-      </div>
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12 md:mb-24"
-        >
-          <span className="text-japan-system-secondary text-[10px] md:text-sm font-black uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 block">
+    <div className="relative min-h-screen bg-white overflow-hidden pb-32">
+      {/* Cinematic Header */}
+      <div className="relative h-[50vh] flex items-center justify-center overflow-hidden bg-japan-system-primary">
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-30"
+            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80')" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-japan-system-primary/50"></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        </div>
+        
+        <div className="relative z-10 text-center max-w-4xl px-6">
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-japan-system-secondary text-sm font-bold uppercase tracking-[0.4em] mb-6 block"
+          >
             {t('digitalPresence')}
-          </span>
-          <h1 className="text-2xl md:text-6xl font-black text-japan-system-primary mb-6 tracking-tight px-4 md:px-0 leading-[1.2]">
-            Marketing <span className="text-gradient">{t('solutionsSuffix')}</span>
-          </h1>
-          <div className="w-12 md:w-24 h-1 md:h-1.5 bg-japan-system-secondary mx-auto rounded-full mb-6 md:mb-10"></div>
-          <p className="max-w-3xl mx-auto text-gray-600 text-sm md:text-xl leading-relaxed px-4 md:px-2">
+          </motion.span>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-white mb-8"
+          >
+            Marketing <span className="text-japan-system-secondary">{t('solutionsSuffix')}</span>
+          </motion.h1>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 -mt-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-24"
+        >
+          <p className="max-w-3xl mx-auto text-gray-500 text-xl md:text-2xl leading-relaxed font-medium">
             {t('webMarketingDesc')}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 mb-16 md:mb-24 px-2 md:px-0">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-32"
+        >
           {services.map((service, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-            >
-              <TiltCard tiltMaxAngleX={3} tiltMaxAngleY={3} className="h-full">
-                <Link to="/contact" className="block h-full cursor-pointer">
-                  <div className="glass-card p-6 md:p-10 h-full flex items-start md:flex-col group hover:border-japan-system-secondary/30 transition-all duration-500 hover:shadow-xl hover:-translate-y-1">
-                    <div className="w-10 h-10 md:w-16 md:h-16 bg-gray-50 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:bg-japan-system-primary transition-all duration-500 shadow-sm shrink-0">
-                      <service.icon className="w-4 h-4 md:w-7 md:h-7 text-japan-system-primary group-hover:text-white transition-colors duration-500" />
+            <motion.div key={idx} variants={itemVariants}>
+              <TiltCard className="h-full">
+                <Link to="/contact" className="block h-full">
+                  <div className="glass-card shine-effect p-12 h-full flex flex-col group hover:glass-card-hover border-white/50">
+                    <div className="w-16 h-16 bg-japan-system-primary/5 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-japan-system-primary transition-all duration-500 shadow-sm">
+                      <service.icon className="w-8 h-8 text-japan-system-primary group-hover:text-white transition-colors" />
                     </div>
-                    <div className="ml-5 md:ml-0 md:mt-8 flex-grow">
-                      <h3 className="text-base md:text-2xl font-black text-japan-system-primary mb-2 md:mb-4 group-hover:text-japan-system-secondary transition-colors">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-600 text-[12px] md:text-base leading-relaxed mb-4 md:mb-6 line-clamp-3 md:line-clamp-none">
-                        {service.desc}
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {service.tags.map((tag, i) => (
-                          <span key={i} className="px-2.5 py-1 bg-gray-50 text-gray-400 text-[8px] md:text-[10px] font-bold uppercase tracking-widest rounded-lg group-hover:bg-blue-50 group-hover:text-japan-system-secondary transition-colors">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                    <h3 className="text-3xl font-bold text-japan-system-primary mb-6 group-hover:text-japan-system-secondary transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-500 text-lg leading-relaxed mb-10 opacity-80">
+                      {service.desc}
+                    </p>
+                    <div className="mt-auto flex flex-wrap gap-3">
+                      {service.tags.map((tag, i) => (
+                        <span key={i} className="px-4 py-2 bg-gray-50 text-gray-400 text-[10px] font-bold uppercase tracking-widest rounded-xl group-hover:bg-blue-50 group-hover:text-japan-system-secondary transition-colors">
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </Link>
               </TiltCard>
             </motion.div>
           ))}
-        </div>
-
-        {/* Social Media Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16 md:mb-24 px-2 md:px-0"
-        >
-          <div className="text-center mb-10 md:mb-16">
-            <span className="text-japan-system-secondary text-[9px] md:text-xs font-black uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4 block">Connect with Us</span>
-            <h2 className="text-xl md:text-3xl font-black text-japan-system-primary tracking-tight uppercase italic px-4 md:px-0">
-              Our <span className="text-japan-system-secondary">Social Channels</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {socialLinks.map((social, i) => (
-              <a 
-                key={i} 
-                href={social.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group"
-              >
-                <div className="bg-white border border-gray-100 p-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 hover:shadow-xl hover:border-japan-system-secondary/30 hover:-translate-y-1">
-                  <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-500 shadow-sm group-hover:scale-110"
-                    style={{ backgroundColor: social.color + '10' }}
-                  >
-                    <social.icon className="w-5 h-5" style={{ color: social.color }} />
-                  </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-gray-400 group-hover:text-japan-system-primary transition-colors">{social.label}</span>
-                </div>
-              </a>
-            ))}
-          </div>
         </motion.div>
 
-
-        <div className="grid grid-cols-1 gap-10 md:gap-16 items-center px-2 md:px-0">
-            <div className="glass-card p-8 md:p-12 bg-gradient-to-br from-japan-system-primary to-japan-system-primary/90 text-white shadow-2xl relative overflow-hidden text-center lg:text-left">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl"></div>
-              <h3 className="text-lg md:text-2xl font-black mb-4 md:mb-6 tracking-tight uppercase">{t('readyToGrow')}</h3>
-              <p className="text-white/70 text-[12px] md:text-base mb-8 md:mb-10 leading-relaxed px-2 md:px-0">
-                {t('readyToGrowDesc')}
-              </p>
-              <Link to="/contact" className="w-full bg-white text-japan-system-primary font-black py-4 md:py-5 rounded-xl md:rounded-2xl hover:bg-japan-system-secondary hover:text-white transition-all duration-300 shadow-xl flex items-center justify-center group text-xs uppercase tracking-widest">
-                <span>{t('startProject')}</span>
-                <FiArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+        {/* Social Media Connect */}
+        <div className="mb-32">
+          <div className="text-center mb-20">
+            <span className="text-japan-system-secondary text-sm font-bold uppercase tracking-[0.4em] mb-4 block">Connect with Us</span>
+            <h2 className="text-japan-system-primary">Our <span className="text-gradient">Social Channels</span></h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {socialLinks.map((social, i) => (
+              <Magnetic key={i}>
+                <a 
+                  href={social.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block group"
+                >
+                  <div className="glass-card p-10 flex flex-col items-center justify-center border-white hover:glass-card-hover">
+                    <div 
+                      className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 shadow-sm group-hover:scale-110"
+                      style={{ backgroundColor: social.color + '10' }}
+                    >
+                      <social.icon className="w-6 h-6" style={{ color: social.color }} />
+                    </div>
+                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-400 group-hover:text-japan-system-primary transition-colors">{social.label}</span>
+                  </div>
+                </a>
+              </Magnetic>
+            ))}
+          </div>
         </div>
+
+        {/* Marketing CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="glass-card p-16 bg-gradient-to-br from-japan-system-primary to-japan-system-primary/90 text-white text-center relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+          <h2 className="text-white mb-8 relative z-10">{t('readyToGrow')}</h2>
+          <p className="text-white/70 text-xl mb-12 max-w-2xl mx-auto relative z-10">
+            {t('readyToGrowDesc')}
+          </p>
+          <div className="flex justify-center relative z-10">
+            <Magnetic>
+              <Link to="/contact" className="luxury-button px-20 text-lg bg-white text-japan-system-primary hover:bg-japan-system-secondary hover:text-white transition-all duration-500">
+                <span>{t('startProject')}</span>
+                <FiArrowRight className="ml-2" />
+              </Link>
+            </Magnetic>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
 export default Marketing;
+
