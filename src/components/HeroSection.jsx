@@ -12,8 +12,8 @@ const HeroSection = () => {
     <div className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-[center_15%] bg-no-repeat scale-105"
-        style={{ backgroundImage: "url('/hero-japan.jpg')" }}
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat scale-105"
+        style={{ backgroundImage: "url('/hero_bg.png')" }}
       >
         <div className="absolute inset-0 bg-japan-system-primary/70 backdrop-blur-[2px] mix-blend-multiply"></div>
       </div>
