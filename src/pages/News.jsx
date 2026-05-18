@@ -1,11 +1,13 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FiPlayCircle, FiArrowRight, FiCalendar, FiTag, FiCheckCircle } from 'react-icons/fi';
-import { motion } from 'framer-motion';
+import { FiPlayCircle, FiArrowRight, FiCalendar, FiTag, FiCheckCircle, FiX } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
 import TiltCard from '../components/TiltCard';
 
 const News = () => {
   const { t } = useTranslation();
+  const [showVideo, setShowVideo] = useState(false);
 
   const newsItems = [
     {
@@ -139,16 +141,16 @@ const News = () => {
                   {t('spotlightDesc')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start px-4 md:px-0">
-                  <Link to="/contact" className="luxury-button w-full sm:min-w-[180px] text-xs py-4">
+                  <button onClick={() => setShowVideo(true)} className="luxury-button w-full sm:min-w-[180px] text-xs py-4">
                     {t('watchDemo')}
-                  </Link>
+                  </button>
                   <Link to="/contact" className="w-full sm:w-auto px-8 py-4 rounded-xl border border-gray-200 text-japan-system-primary text-xs font-bold uppercase tracking-widest hover:bg-gray-50 transition-all flex items-center justify-center">
                     {t('techSpecs')}
                   </Link>
                 </div>
               </div>
 
-              <Link to="/contact" className="w-full px-4 md:px-0">
+              <div onClick={() => setShowVideo(true)} className="w-full px-4 md:px-0">
                 <TiltCard tiltMaxAngleX={4} tiltMaxAngleY={4} className="relative aspect-video rounded-xl md:rounded-3xl overflow-hidden shadow-2xl group cursor-pointer">
                   <img 
                     src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
@@ -162,7 +164,7 @@ const News = () => {
                     </div>
                   </div>
                 </TiltCard>
-              </Link>
+              </div>
             </div>
           </div>
         </motion.div>
@@ -255,6 +257,46 @@ const News = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* YouTube Video Modal Overlay */}
+      <AnimatePresence>
+        {showVideo && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 md:p-10"
+            onClick={() => setShowVideo(false)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-4xl aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button 
+                onClick={() => setShowVideo(false)}
+                className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors"
+              >
+                <FiX className="w-6 h-6" />
+              </button>
+
+              {/* YouTube Iframe */}
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/ScMzIvxBSi4?autoplay=1"
+                title="MY LOG STAR PC Log Management Demo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

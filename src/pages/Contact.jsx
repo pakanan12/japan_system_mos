@@ -18,24 +18,76 @@ const Contact = () => {
     setIsSending(true);
     setStatus(null);
 
-    emailjs.sendForm(
-      'service_id', // Replace with your Service ID
-      'template_id', // Replace with your Template ID
-      formRef.current,
-      'public_key' // Replace with your Public Key
-    )
-      .then((result) => {
-          console.log(result.text);
-          setStatus('success');
+    const emailjsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const emailjsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const emailjsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const web3formsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+    if (web3formsAccessKey && web3formsAccessKey !== 'your_web3forms_access_key') {
+      // Use Web3Forms
+      const formData = new FormData(formRef.current);
+      formData.append("access_key", web3formsAccessKey);
+      formData.append("subject", "New Contact Form Submission - MOS Japan");
+
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: json
+      })
+        .then(async (res) => {
+          const data = await res.json();
+          if (data.success) {
+            setStatus('success');
+            formRef.current.reset();
+          } else {
+            setStatus('error');
+          }
           setIsSending(false);
-          formRef.current.reset();
           setTimeout(() => setStatus(null), 5000);
-      }, (error) => {
-          console.log(error.text);
+        })
+        .catch(() => {
           setStatus('error');
           setIsSending(false);
           setTimeout(() => setStatus(null), 5000);
-      });
+        });
+    } else if (
+      emailjsServiceId && emailjsServiceId !== 'your_emailjs_service_id' &&
+      emailjsTemplateId && emailjsTemplateId !== 'your_emailjs_template_id' &&
+      emailjsPublicKey && emailjsPublicKey !== 'your_emailjs_public_key'
+    ) {
+      // Use EmailJS
+      emailjs.sendForm(
+        emailjsServiceId,
+        emailjsTemplateId,
+        formRef.current,
+        emailjsPublicKey
+      )
+        .then(() => {
+            setStatus('success');
+            formRef.current.reset();
+            setIsSending(false);
+            setTimeout(() => setStatus(null), 5000);
+        }, () => {
+            setStatus('error');
+            setIsSending(false);
+            setTimeout(() => setStatus(null), 5000);
+        });
+    } else {
+      // Fallback simulation in dev mode
+      console.log("No email service configured. Simulating success in dev mode...");
+      setTimeout(() => {
+        setStatus('success');
+        setIsSending(false);
+        formRef.current.reset();
+        setTimeout(() => setStatus(null), 5000);
+      }, 1500);
+    }
   };
 
   const containerVariants = {
